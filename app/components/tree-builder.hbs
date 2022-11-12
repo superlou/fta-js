@@ -1,0 +1,11 @@
+<svg width="600" height="500" {{on "mousemove" this.mouseMove}} {{on "mouseup" this.mouseUp}}>
+  {{#each @tree.edges as |edge|}}
+    <TreeEdge @start={{edge.start}} @finish={{edge.finish}}/>
+  {{/each}}
+  {{#each @tree.nodes as |node|}}
+    <TreeNode @x={{node.x}} @y={{node.y}} @id={{node.id}}
+      @nodeType={{node.nodeType}} @ref={{node.ref}}
+      @onSelect={{this.select}}/>
+  {{/each}}
+</svg>
+{{this.selected}}

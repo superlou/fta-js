@@ -1,0 +1,95 @@
+function findGate(m, g) {
+  let result = [null, null, null];
+  
+  m.every((row, x) => {
+    return row.every((item, y) => {
+      if (item in g) {
+        result = [item, x, y];
+        return false;
+      } else {
+        return true;
+      }
+    });
+  });
+  
+  return result;
+}
+
+// Avoid https://stackoverflow.com/questions/13756482/create-copy-of-multi-dimensional-array-not-reference-javascript
+function logNow(x) {
+  console.log(JSON.parse(JSON.stringify(x)));
+}
+
+export function buildMocusTable(gates, top) {
+  let g = {}
+  
+  gates.forEach(gate => 
+    g[gate[0]] = gate
+  );
+    
+  let m = [[top]];  // Table for MOCUS expansion 
+  let [name, x, y] = findGate(m, g);
+  
+  while (name !== null) {
+    let kind = g[name][1];
+    let inputs = g[name][2];
+    
+    if (kind == "and") {
+      m[x][y] = inputs[0];
+      m[x] = m[x].concat(inputs.slice(1));
+    } else if (kind == "or") {
+      m[x][y] = inputs[0];
+      inputs.slice(1).forEach(inp => {
+        let new_row = [...m[x]];
+        new_row[y] = inp;
+        m = m.concat([new_row]);
+      });
+    }
+    
+    [name, x, y] = findGate(m, g);
+  }
+  
+  return m;
+}
+
+/*
+def get_mcs(cutsets):
+    cutsets = sorted(cutsets, key=len)
+    min_cutsets = []
+    for cutset in cutsets:
+        if not any(min_cutset.issubset(cutset) for min_cutset in min_cutsets):
+            min_cutsets.append(cutset)
+    
+    return min_cutsets
+*/
+
+export function findMCS(cutsets) {
+  cutsets = cutsets.map(row => {
+    let s = new Set();
+    row.forEach(item => s.add(item));
+    return s;
+  });
+
+  cutsets.sort((a, b) => a.size - b.size);
+ 
+  let min_cutsets = []  
+    
+  cutsets.forEach(cutset => {
+    let isSubsetOfAnyMCS = min_cutsets.map(min_cutset => min_cutset.issubset(cutset));
+    console.log(isSubsetOfAnyMCS)
+    if (!isSubsetOfAnyMCS.some(item => item)) {
+      console.log("here");
+      min_cutsets.push(cutset);
+    }
+  });
+  
+  return [];
+}
+
+export default function mocus(gates, top) {
+  let m = buildMocusTable(gates, top);
+  
+  logNow(m);
+  
+  return true;
+}
