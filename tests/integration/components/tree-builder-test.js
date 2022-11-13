@@ -16,11 +16,9 @@ module('Integration | Component | tree-builder', function (hooks) {
 
     // Template block usage:
     await render(hbs`
-      <TreeBuilder>
-        template block text
-      </TreeBuilder>
+      <TreeBuilder/>
     `);
 
-    assert.dom(this.element).hasText('template block text');
+    assert.dom(this.element).hasText('');
   });
 });
