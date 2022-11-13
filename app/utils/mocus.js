@@ -52,17 +52,6 @@ export function buildMocusTable(gates, top) {
   return m;
 }
 
-/*
-def get_mcs(cutsets):
-    cutsets = sorted(cutsets, key=len)
-    min_cutsets = []
-    for cutset in cutsets:
-        if not any(min_cutset.issubset(cutset) for min_cutset in min_cutsets):
-            min_cutsets.append(cutset)
-    
-    return min_cutsets
-*/
-
 export function isSubset(subset, set) {
   let isSubset = [...subset].every(element => set.has(element));
   // console.log(subset, set, isSubset);
@@ -76,7 +65,8 @@ export function findMCS(cutsets) {
   let minCutsets = []  
     
   cutsets.forEach(cutset => {
-    // Add the cutset to the minCutsets if none of the current minCutsets are a subset of it
+    // Add the cutset to the minCutsets if none of the current minCutsets are a
+    // subset of it.
     let isSubsetOfAnyMCS = minCutsets.map(minCutset => isSubset(minCutset, cutset));
     if (!isSubsetOfAnyMCS.some(item => item)) {
       minCutsets.push(cutset);
@@ -87,9 +77,7 @@ export function findMCS(cutsets) {
 }
 
 export default function mocus(gates, top) {
-  let m = buildMocusTable(gates, top);
-  
-  logNow(m);
-  
-  return true;
+  let table = buildMocusTable(gates, top);
+  let mcs = findMCS(table);
+  return mcs;
 }
