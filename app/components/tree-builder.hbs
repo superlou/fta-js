@@ -1,6 +1,9 @@
-<svg width="600" height="500" {{on "mousemove" this.mouseMove}} {{on "mouseup" this.mouseUp}}>
+<svg width="600" height="500"
+    {{on "mousemove" this.mouseMove}}
+    {{on "mouseup" this.mouseUp}}
+    {{on "keydown" this.keyPress}} tabindex="0">
   {{#each @tree.edges as |edge|}}
-    <TreeEdge @start={{edge.start}} @finish={{edge.finish}}/>
+    <TreeEdge @start={{edge.child}} @finish={{edge.parent}}/>
   {{/each}}
   {{#each @tree.nodes as |node|}}
     <TreeNode @x={{node.x}} @y={{node.y}} @id={{node.id}}
@@ -8,4 +11,8 @@
       @onSelect={{this.select}}/>
   {{/each}}
 </svg>
-{{this.selected}}
+<div>
+  Solution: {{this.solution}}<br/>
+  Dragged: {{this.dragged}}<br/>
+  Selected: {{this.selected}}<br/>
+</div>
