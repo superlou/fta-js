@@ -1,6 +1,6 @@
 function findGate(m, g) {
   let result = [null, null, null];
-  
+
   m.every((row, x) => {
     return row.every((item, y) => {
       if (item in g) {
@@ -11,7 +11,7 @@ function findGate(m, g) {
       }
     });
   });
-  
+
   return result;
 }
 
@@ -21,59 +21,59 @@ function logNow(x) {
 }
 
 export function buildMocusTable(gates, top) {
-  let g = {}
-  
-  gates.forEach(gate => 
-    g[gate[0]] = gate
-  );
-    
-  let m = [[top]];  // Table for MOCUS expansion 
+  let g = {};
+
+  gates.forEach((gate) => (g[gate[0]] = gate));
+
+  let m = [[top]]; // Table for MOCUS expansion
   let [name, x, y] = findGate(m, g);
-  
+
   while (name !== null) {
     let kind = g[name][1];
     let inputs = g[name][2];
-    
-    if (kind == "and") {
+
+    if (kind == 'and') {
       m[x][y] = inputs[0];
       m[x] = m[x].concat(inputs.slice(1));
-    } else if (kind == "or") {
+    } else if (kind == 'or') {
       m[x][y] = inputs[0];
-      inputs.slice(1).forEach(inp => {
+      inputs.slice(1).forEach((inp) => {
         let new_row = [...m[x]];
         new_row[y] = inp;
         m = m.concat([new_row]);
       });
     }
-    
+
     [name, x, y] = findGate(m, g);
   }
-  
+
   return m;
 }
 
 export function isSubset(subset, set) {
-  let isSubset = [...subset].every(element => set.has(element));
+  let isSubset = [...subset].every((element) => set.has(element));
   // console.log(subset, set, isSubset);
   return isSubset;
 }
 
 export function findMCS(cutsets) {
-  cutsets = cutsets.map(row => new Set(row));  
+  cutsets = cutsets.map((row) => new Set(row));
   cutsets.sort((a, b) => a.size - b.size);
-  
-  let minCutsets = []  
-    
-  cutsets.forEach(cutset => {
+
+  let minCutsets = [];
+
+  cutsets.forEach((cutset) => {
     // Add the cutset to the minCutsets if none of the current minCutsets are a
     // subset of it.
-    let isSubsetOfAnyMCS = minCutsets.map(minCutset => isSubset(minCutset, cutset));
-    if (!isSubsetOfAnyMCS.some(item => item)) {
+    let isSubsetOfAnyMCS = minCutsets.map((minCutset) =>
+      isSubset(minCutset, cutset)
+    );
+    if (!isSubsetOfAnyMCS.some((item) => item)) {
       minCutsets.push(cutset);
     }
   });
 
-  return minCutsets.map(set => Array.from(set));
+  return minCutsets.map((set) => Array.from(set));
 }
 
 export default function mocus(gates, top) {
