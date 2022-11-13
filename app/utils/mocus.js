@@ -64,31 +64,26 @@ def get_mcs(cutsets):
 */
 
 export function isSubset(subset, set) {
-  return [...subset].every(element => set.has(element));
+  let isSubset = [...subset].every(element => set.has(element));
+  // console.log(subset, set, isSubset);
+  return isSubset;
 }
 
 export function findMCS(cutsets) {
-  cutsets = cutsets.map(row => {
-    let s = new Set();
-    row.forEach(item => s.add(item));
-    return s;
-  });
-
+  cutsets = cutsets.map(row => new Set(row));  
   cutsets.sort((a, b) => a.size - b.size);
- 
+  
   let minCutsets = []  
     
   cutsets.forEach(cutset => {
-    let isSubsetOfAnyMCS = minCutsets.map(minCutset => isSubset(cutset, minCutset));
-    console.log(isSubsetOfAnyMCS);
+    // Add the cutset to the minCutsets if none of the current minCutsets are a subset of it
+    let isSubsetOfAnyMCS = minCutsets.map(minCutset => isSubset(minCutset, cutset));
     if (!isSubsetOfAnyMCS.some(item => item)) {
-      logNow(cutset);
-      console.log(cutset);
       minCutsets.push(cutset);
     }
   });
 
-  return minCutsets;
+  return minCutsets.map(set => Array.from(set));
 }
 
 export default function mocus(gates, top) {

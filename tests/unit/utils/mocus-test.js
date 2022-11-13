@@ -18,7 +18,6 @@ module('Unit | Utility | mocus', function () {
   test('finds minimum cutsets', function(assert) {
     let cutsets = [[1, 2], [2, 3], [1, 4], [2, 4, 3]]
     let result = findMCS(cutsets);
-    console.log(result);
     assert.deepEqual(result, [[1, 2],
                               [2, 3],
                               [1, 4]]);
