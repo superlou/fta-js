@@ -7,5 +7,6 @@ export default class BuilderController extends Controller {
     let node = this.model.nodes.find((node) => node.id == selectedId);
     node.x = x;
     node.y = y;
+    node.save();
   }
 }

@@ -7,5 +7,6 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('builder');
+  this.route('builder', { path: '/builder/:fault_tree_id' });
+  this.route('builders');
 });

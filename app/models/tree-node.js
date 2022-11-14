@@ -6,5 +6,5 @@ export default class TreeNodeModel extends Model {
   @attr('string') nodeType;
   @attr('string') ref;
   @attr('string') desc;
-  @belongsTo('fault-tree', { async: false, inverse: null }) faultTree;
+  @belongsTo('fault-tree', { async: true, inverse: 'nodes' }) faultTree;
 }
