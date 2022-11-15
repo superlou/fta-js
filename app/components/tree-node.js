@@ -7,11 +7,11 @@ export default class TreeNodeComponent extends Component {
   basicElementPath = 'm -25,0 a 25,25 0 1,1 50,0 a 25,25 0 1,1 -50,0';
 
   get pathD() {
-    if (this.args.nodeType == 'and-gate') {
+    if (this.args.model.nodeType == 'and-gate') {
       return this.andPath;
-    } else if (this.args.nodeType == 'or-gate') {
+    } else if (this.args.model.nodeType == 'or-gate') {
       return this.orPath;
-    } else if (this.args.nodeType == 'basic-event') {
+    } else if (this.args.model.nodeType == 'basic-event') {
       return this.basicElementPath;
     }
   }

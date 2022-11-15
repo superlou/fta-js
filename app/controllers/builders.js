@@ -10,7 +10,7 @@ export default class BuildersController extends Controller {
     let record = this.store.createRecord('fault-tree');
     record.save();
   }
-  
+
   @action
   deleteFaultTree(faultTree) {
     faultTree.deleteRecord();

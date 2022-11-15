@@ -2,7 +2,7 @@
   {{#each this.model as |faultTree|}}
     <li>
       <LinkTo @route="builder" @model={{faultTree.id}}>{{faultTree.id}}</LinkTo>
-      <button {{on "click" (fn this.deleteFaultTree faultTree)}}>X</button>
+      <button type="button" {{on "click" (fn this.deleteFaultTree faultTree)}}>X</button>
     </li>
   {{/each}}
 </ul>

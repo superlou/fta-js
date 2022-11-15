@@ -1,3 +1,5 @@
 {{page-title "Builder"}}
 
-<TreeBuilder @tree={{@model}} @moveNode={{this.moveNode}}/>
+<TreeBuilder @tree={{@model}} @selected={{this.selected}}
+  @select={{this.select}} @deselect={{this.deselect}}/>
+<NodeEditor @selected={{this.selected}}/>

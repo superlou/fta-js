@@ -8,44 +8,40 @@ export default class TreeBuilderComponent extends Component {
   @service store;
 
   @tracked dragged = null;
-  @tracked selected = null;
+  // @tracked selected = null;
   @tracked solution = null;
   @tracked isLinking = false;
   mousePos = [0, 0];
 
   @action
-  async select(id) {
+  async select(model) {
     if (this.isLinking) {
       this.isLinking = false;
-      this.makeEdge(this.selected, id);
+      this.makeEdge(this.args.selected, model);
     }
 
-    this.dragged = id;
-    this.selected = id;
+    this.dragged = model;
+    this.args.select(model);
   }
-  
-  async makeEdge(firstId, secondId) {
-    const nodes = await this.args.tree.nodes;
-    let node0 = nodes.find(node => node.id == firstId);
-    let node1 = nodes.find(node => node.id == secondId);
-      
+
+  async makeEdge(node0, node1) {
     if (node0 === undefined) {
-      console.log("Tried to link undefined node0!");
+      console.log('Tried to link undefined node0!');
       return;
     }
-  
+
     if (node1 === undefined) {
-      console.log("Tried to link undefined node1!");
+      console.log('Tried to link undefined node1!');
       return;
     }
-      
+
     if (node0 == node1) {
       console.log("Can't link node to itself!");
       return;
     }
-      
+
     let parent, child;
-    [parent, child] = (node0.y < node1.y) ? [node0, node1] : [node1, node0];
+    [parent, child] = node0.y < node1.y ? [node0, node1] : [node1, node0];
 
     let edge = this.store.createRecord('tree-edge', {
       faultTree: this.args.tree,
@@ -62,20 +58,19 @@ export default class TreeBuilderComponent extends Component {
   @action
   mouseMove(evt) {
     this.mousePos = [evt.clientX, evt.clientY];
-    
+
     if (this.dragged !== null) {
       this.shiftNode(this.dragged, evt.movementX, evt.movementY);
     }
   }
 
-  async shiftNode(selectedId, dx, dy) {
-    const nodes = await this.args.tree.nodes;
-    let node = nodes.find((node) => node.id == selectedId);
+  shiftNode(selectedId, dx, dy) {
+    let node = this.args.selected;
     node.x += dx;
     node.y += dy;
     node.save();
   }
-  
+
   @action
   mouseUp(evt) {
     this.dragged = null;
@@ -83,8 +78,8 @@ export default class TreeBuilderComponent extends Component {
 
   @action
   keyPress(evt) {
-    if (evt.key == 's' && this.selected) {
-      this.solve(this.selected);
+    if (evt.key == 's' && this.args.selected) {
+      this.solve(this.args.selected);
     } else if (evt.key == 'a') {
       this.createNode('and-gate');
     } else if (evt.key == 'o') {
@@ -92,15 +87,15 @@ export default class TreeBuilderComponent extends Component {
     } else if (evt.key == 'e') {
       this.createNode('basic-event');
     } else if (evt.key == 'Delete') {
-      this.deleteNode(this.selected);
-    } else if (evt.key == 'l' && this.selected) {
+      this.deleteNode(this.args.selected);
+    } else if (evt.key == 'l' && this.args.selected) {
       this.isLinking = true;
     } else if (evt.key == 'Escape') {
       this.isLinking = false;
-      this.selected = null;
+      this.args.deselect;
     }
   }
-  
+
   createNode(gateType) {
     console.log(this.mousePos);
     let record = this.store.createRecord('tree-node', {
@@ -114,18 +109,18 @@ export default class TreeBuilderComponent extends Component {
     record.save();
     this.args.tree.save();
   }
-  
+
   async deleteNode(nodeId) {
     const nodes = await this.args.tree.nodes;
-    let node = nodes.find(node => node.id == nodeId);
-    
+    let node = this.args.selected;
+
     if (node) {
       const index = nodes.indexOf(node);
       if (index > -1) {
         nodes.splice(index, 1);
         this.args.tree.save();
         node.destroyRecord();
-        node.save(); 
+        node.save();
       }
     }
   }
