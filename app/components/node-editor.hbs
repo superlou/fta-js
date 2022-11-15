@@ -1,4 +1,5 @@
 <div class="node-editor">
-Node Editor
-{{@selected}}
+  Node Editor
+  {{@model}}
+  <Input @type="text" @value={{@model.ref}} {{on "keyup" this.saveModel}}/>
 </div>

@@ -92,7 +92,7 @@ export default class TreeBuilderComponent extends Component {
       this.isLinking = true;
     } else if (evt.key == 'Escape') {
       this.isLinking = false;
-      this.args.deselect;
+      this.args.deselect();
     }
   }
 

@@ -1,6 +1,6 @@
 <g class="tree-node" transform="translate({{@model.x}}, {{@model.y}})" {{on "mousedown" (fn @onSelect @model)}}>
   <path d={{this.pathD}} shape-rendering="optimizeQuality"/>
   <text x="0" y="4">
-    {{@ref}}
+    {{@model.ref}}
   </text>
 </g>
