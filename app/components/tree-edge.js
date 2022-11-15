@@ -4,15 +4,18 @@ export default class TreeEdgeComponent extends Component {
   edgeCurve = 50;
 
   get pathD() {
-    let start = this.args.start;
-    let finish = this.args.finish;
     let edgeCurve = this.edgeCurve;
 
+    // get(...) is required to avoid error
+    let startX = this.args.start.get('x');
+    let startY = this.args.start.get('y');
+    let finishX = this.args.finish.get('x');
+    let finishY = this.args.finish.get('y');
+    
     return (
-      `M ${start.x},${start.y} ` +
-      `C ${start.x},${start.y - edgeCurve}, ${finish.x},${
-        finish.y + edgeCurve
-      }, ${finish.x},${finish.y}`
+      `M ${startX},${startY} ` +
+      `C ${startX},${startY - edgeCurve}, ${finishX},${finishY + edgeCurve
+      }, ${finishX},${finishY}`
     );
   }
 }

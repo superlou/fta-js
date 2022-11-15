@@ -3,8 +3,9 @@ import { action } from '@ember/object';
 
 export default class BuilderController extends Controller {
   @action
-  moveNode(selectedId, x, y) {
-    let node = this.model.nodes.find((node) => node.id == selectedId);
+  async moveNode(selectedId, x, y) {
+    const nodes = await this.model.nodes;
+    let node = nodes.find((node) => node.id == selectedId);
     node.x = x;
     node.y = y;
     node.save();

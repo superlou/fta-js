@@ -14,19 +14,49 @@ export default class TreeBuilderComponent extends Component {
   mousePos = [0, 0];
 
   @action
-  select(id) {
+  async select(id) {
     if (this.isLinking) {
       this.isLinking = false;
-      let node0 = this.args.tree.nodes.find(node => this.selected == id);
-      let node1 = this.args.tree.nodes.find(node => node.id == id);
-      
-      let parentNode = (node0.y < node1.y) ? node0 : node1;
-      let childNode  = (node0.y < node1.y) ? node1 : node0;
-      
-      // todo Do the linking
+      this.makeEdge(this.selected, id);
     }
+
     this.dragged = id;
     this.selected = id;
+  }
+  
+  async makeEdge(firstId, secondId) {
+    const nodes = await this.args.tree.nodes;
+    let node0 = nodes.find(node => node.id == firstId);
+    let node1 = nodes.find(node => node.id == secondId);
+      
+    if (node0 === undefined) {
+      console.log("Tried to link undefined node0!");
+      return;
+    }
+  
+    if (node1 === undefined) {
+      console.log("Tried to link undefined node1!");
+      return;
+    }
+      
+    if (node0 == node1) {
+      console.log("Can't link node to itself!");
+      return;
+    }
+      
+    let parent, child;
+    [parent, child] = (node0.y < node1.y) ? [node0, node1] : [node1, node0];
+
+    let edge = this.store.createRecord('tree-edge', {
+      faultTree: this.args.tree,
+      child: child,
+      parent: parent,
+    });
+
+    edge.save();
+    this.args.tree.save();
+    parent.save();
+    child.save();
   }
 
   @action
@@ -75,14 +105,18 @@ export default class TreeBuilderComponent extends Component {
     this.args.tree.save();
   }
   
-  deleteNode(nodeId) {
-    let node = this.args.tree.nodes.find(node => node.id == nodeId);
+  async deleteNode(nodeId) {
+    const nodes = await this.args.tree.nodes;
+    let node = nodes.find(node => node.id == nodeId);
     
     if (node) {
-      this.args.tree.nodes.removeObject(node);
-      this.args.tree.save();
-      node.destroyRecord();
-      node.save();
+      const index = nodes.indexOf(node);
+      if (index > -1) {
+        nodes.splice(index, 1);
+        this.args.tree.save();
+        node.destroyRecord();
+        node.save(); 
+      }
     }
   }
 
