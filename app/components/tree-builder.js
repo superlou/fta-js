@@ -78,9 +78,11 @@ export default class TreeBuilderComponent extends Component {
     if (evt.key == 's' && this.selected) {
       this.solve(this.selected);
     } else if (evt.key == 'a') {
-      this.addLogicGate('and-gate');
+      this.createNode('and-gate');
     } else if (evt.key == 'o') {
-      this.addLogicGate('or-gate');
+      this.createNode('or-gate');
+    } else if (evt.key == 'e') {
+      this.createNode('basic-event');
     } else if (evt.key == 'Delete') {
       this.deleteNode(this.selected);
     } else if (evt.key == 'l' && this.selected) {
@@ -91,7 +93,7 @@ export default class TreeBuilderComponent extends Component {
     }
   }
   
-  addLogicGate(gateType) {
+  createNode(gateType) {
     console.log(this.mousePos);
     let record = this.store.createRecord('tree-node', {
       x: this.mousePos[0],
