@@ -64,10 +64,18 @@ export default class TreeBuilderComponent extends Component {
     this.mousePos = [evt.clientX, evt.clientY];
     
     if (this.dragged !== null) {
-      this.args.moveNode(this.dragged, evt.clientX, evt.clientY);
+      this.shiftNode(this.dragged, evt.movementX, evt.movementY);
     }
   }
 
+  async shiftNode(selectedId, dx, dy) {
+    const nodes = await this.args.tree.nodes;
+    let node = nodes.find((node) => node.id == selectedId);
+    node.x += dx;
+    node.y += dy;
+    node.save();
+  }
+  
   @action
   mouseUp(evt) {
     this.dragged = null;
