@@ -1,3 +1,53 @@
+body {
+  font-family: sans-serif;
+}
+
+.tree-builder {
+  width: 100%;
+  margin-right: -240px;
+  float: left;
+  
+  .svg-holder {
+    margin-right: 240px;
+  }
+}
+
+.node-editor {
+  width: 220px;
+  float: right;
+  margin: 0px 10px;
+  
+  h1 {
+    font-size: 8pt;
+    margin: 0px;
+    margin-bottom: 0.4em;
+    text-transform: uppercase;
+    color: #808080;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    
+    li {
+      padding: 0.2em 0px;
+    }
+    
+    textarea {
+      width: 100%;
+      height: 100px;
+    }
+    
+    li.one-line-property {
+      label {
+        width: 40px;
+        display: inline-block;
+      }
+    }
+  }
+}
+
 .tree-node {
   path {
     stroke: black;
@@ -23,12 +73,4 @@
 svg {
   border: 1px solid #e0e0e0;
   box-shadow: inset 0 0 10px #e0e0e0;
-}
-
-.tree-builder {
-  float: left;
-}
-
-.node-editor {
-  float: right;
 }

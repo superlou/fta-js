@@ -1,8 +1,11 @@
 <div class="node-editor">
   <h1>Node Properties</h1>
   <ul>
-    <li>ID: {{@model.id}}</li>
-    <li>
+    <li class="one-line-property">
+      <label>ID:</label>
+      {{@model.id}}
+    </li>
+    <li class="one-line-property">
       <label for="node_ref">Ref:</label>
       <Input @type="text"
         id="node_ref"
@@ -11,7 +14,7 @@
         {{on "keyup" this.saveModel}}/>
     </li>
     <li>
-      <label for="node_desc">Desc:</label>
+      <label for="node_desc">Description:</label><br/>
       <Textarea
         id="node_desc"
         @value={{@model.desc}}
