@@ -7,8 +7,7 @@ import mocus from '../utils/mocus';
 export default class TreeBuilderComponent extends Component {
   @service store;
 
-  @tracked dragged = null;
-  // @tracked selected = null;
+  @tracked isDragging = false;
   @tracked solution = null;
   @tracked isLinking = false;
   mousePos = [0, 0];
@@ -20,7 +19,7 @@ export default class TreeBuilderComponent extends Component {
       this.makeEdge(this.args.selected, model);
     }
 
-    this.dragged = model;
+    this.isDragging = true;
     this.args.select(model);
   }
 
@@ -59,13 +58,12 @@ export default class TreeBuilderComponent extends Component {
   mouseMove(evt) {
     this.mousePos = [evt.clientX, evt.clientY];
 
-    if (this.dragged !== null) {
-      this.shiftNode(this.dragged, evt.movementX, evt.movementY);
+    if (this.isDragging) {
+      this.shiftNode(this.args.selected, evt.movementX, evt.movementY);
     }
   }
 
-  shiftNode(selectedId, dx, dy) {
-    let node = this.args.selected;
+  shiftNode(node, dx, dy) {
     node.x += dx;
     node.y += dy;
     node.save();
@@ -73,7 +71,7 @@ export default class TreeBuilderComponent extends Component {
 
   @action
   mouseUp(evt) {
-    this.dragged = null;
+    this.isDragging = false;
   }
 
   @action
