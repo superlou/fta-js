@@ -8,9 +8,6 @@
         <TreeEdge @start={{edge.child}} @finish={{edge.parent}}/>
       {{/each}}
       {{#each @tree.nodes as |node|}}
-        {{!--<TreeNode @x={{node.x}} @y={{node.y}} @id={{node.id}}
-          @nodeType={{node.nodeType}} @ref={{node.ref}}
-          @onSelect={{this.select}}/>--}}
         <TreeNode @model={{node}} @onSelect={{this.select}}/>
       {{/each}}
     </svg>
