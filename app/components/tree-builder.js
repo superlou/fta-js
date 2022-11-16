@@ -77,7 +77,7 @@ export default class TreeBuilderComponent extends Component {
   @action
   keyPress(evt) {
     if (evt.key == 's' && this.args.selected) {
-      this.solve(this.args.selected);
+      this.solve(this.args.selected.id);
     } else if (evt.key == 'a') {
       this.createNode('and-gate');
     } else if (evt.key == 'o') {
@@ -123,15 +123,15 @@ export default class TreeBuilderComponent extends Component {
     }
   }
 
-  solve(rootNodeId) {
-    let nodes = this.args.tree.nodes;
-    let edges = this.args.tree.edges;
+  async solve(rootNodeId) {
+    let nodes = await this.args.tree.nodes;
+    let edges = await this.args.tree.edges;
     let gates = {};
     const nodeTypeMap = { 'or-gate': 'or', 'and-gate': 'and' };
 
-    nodes.forEach((node) => {
+    for (const node of nodes) {
       if (!Object.keys(nodeTypeMap).includes(node.nodeType)) {
-        return;
+        continue;
       }
 
       gates[node.id] = {
@@ -139,11 +139,13 @@ export default class TreeBuilderComponent extends Component {
         kind: nodeTypeMap[node.nodeType],
         children: [],
       };
-    });
+    };
 
-    edges.forEach((edge) => {
-      gates[edge.parent.id]['children'].push(edge.child.id);
-    });
+    for (const edge of edges) {
+      let parent = await edge.parent;
+      let child = await edge.child;
+      gates[parent.id]['children'].push(child.id);
+    }
 
     gates = Object.values(gates).map((gate) => [
       gate.id,
@@ -151,14 +153,16 @@ export default class TreeBuilderComponent extends Component {
       gate.children,
     ]);
     let result = mocus(gates, rootNodeId);
-    this.solution = this.formatMocusResult(result);
+    this.solution = await this.formatMocusResult(result);
   }
 
-  formatMocusResult(result) {
+  async formatMocusResult(result) {
+    const nodes = await this.args.tree.nodes;
+    
     return result
       .map((union) =>
         union
-          .map((nodeId) => this.args.tree.nodes.find((n) => n.id == nodeId).ref)
+          .map((nodeId) => nodes.find((n) => n.id == nodeId).ref)
           .join('.')
       )
       .join(' + ');
