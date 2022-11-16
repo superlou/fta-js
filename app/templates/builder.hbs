@@ -1,5 +1,12 @@
 {{page-title "Builder"}}
 
-<TreeBuilder @tree={{@model}} @selected={{this.selected}}
-  @select={{this.select}} @deselect={{this.deselect}}/>
-<NodeEditor @model={{this.selected}}/>
+<div class="content-left">
+  <div class="content-left-container">
+    <TreeBuilder @tree={{@model}} @selected={{this.selected}}
+      @select={{this.select}} @deselect={{this.deselect}}/>
+  </div>
+</div>
+<div class="sidebar">
+  <LinkTo @route="builders" class="back-link">←</LinkTo>
+  <NodeEditor @model={{this.selected}}/>
+</div>

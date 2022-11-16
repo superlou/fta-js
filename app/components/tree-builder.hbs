@@ -1,18 +1,16 @@
 <div class="tree-builder">
-  <div class="svg-holder">
-    <svg width="100%" height="500"
-        {{on "mousemove" this.mouseMove}}
-        {{on "mouseup" this.mouseUp}}
-        {{on "keydown" this.keyPress}} tabindex="0">
-      {{#each @tree.edges as |edge|}}
-        <TreeEdge @start={{edge.child}} @finish={{edge.parent}}/>
-      {{/each}}
-      {{#each @tree.nodes as |node|}}
-        <TreeNode @model={{node}} @onSelect={{this.select}}/>
-      {{/each}}
-    </svg>
-    <div>
-      Solution: {{this.solution}}<br/>
-    </div>
+  <svg width="100%" height="500"
+      {{on "mousemove" this.mouseMove}}
+      {{on "mouseup" this.mouseUp}}
+      {{on "keydown" this.keyPress}} tabindex="0">
+    {{#each @tree.edges as |edge|}}
+      <TreeEdge @start={{edge.child}} @finish={{edge.parent}}/>
+    {{/each}}
+    {{#each @tree.nodes as |node|}}
+      <TreeNode @model={{node}} @onSelect={{this.select}}/>
+    {{/each}}
+  </svg>
+  <div>
+    Solution: {{this.solution}}<br/>
   </div>
 </div>

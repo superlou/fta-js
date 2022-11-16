@@ -2,21 +2,28 @@ body {
   font-family: sans-serif;
 }
 
-.tree-builder {
+.content-left {
   width: 100%;
   margin-right: -240px;
   float: left;
   
-  .svg-holder {
+  .content-left-container {
     margin-right: 240px;
   }
 }
 
-.node-editor {
+.sidebar {
   width: 220px;
   float: right;
   margin: 0px 10px;
   
+  a.back-link {
+    float: right;
+    text-decoration: none;
+  }
+}
+
+.node-editor {  
   h1 {
     font-size: 8pt;
     margin: 0px;
