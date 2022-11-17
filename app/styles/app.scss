@@ -61,6 +61,10 @@ body {
     stroke-width: 2;
     fill: #f8f8f8;
   }
+  
+  &.selected path {
+    fill: #d0e8ff;
+  }
 
   text {
     font-family: sans-serif;

@@ -7,7 +7,7 @@
       <TreeEdge @start={{edge.child}} @finish={{edge.parent}}/>
     {{/each}}
     {{#each @tree.nodes as |node|}}
-      <TreeNode @model={{node}} @onSelect={{this.select}}/>
+      <TreeNode @model={{node}} @onSelect={{this.select}} class="{{if (eq @selected node) 'selected'}}"/>
     {{/each}}
   </svg>
   <div>

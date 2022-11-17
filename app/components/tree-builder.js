@@ -139,7 +139,7 @@ export default class TreeBuilderComponent extends Component {
         kind: nodeTypeMap[node.nodeType],
         children: [],
       };
-    };
+    }
 
     for (const edge of edges) {
       let parent = await edge.parent;
@@ -158,12 +158,10 @@ export default class TreeBuilderComponent extends Component {
 
   async formatMocusResult(result) {
     const nodes = await this.args.tree.nodes;
-    
+
     return result
       .map((union) =>
-        union
-          .map((nodeId) => nodes.find((n) => n.id == nodeId).ref)
-          .join('.')
+        union.map((nodeId) => nodes.find((n) => n.id == nodeId).ref).join('.')
       )
       .join(' + ');
   }
