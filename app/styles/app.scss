@@ -66,10 +66,15 @@ body {
     fill: #d0e8ff;
   }
 
-  text {
+  text.ref {
     font-family: sans-serif;
     font-size: 12px;
     text-anchor: middle;
+  }
+  
+  text.desc {
+    font-family: sans-serif;
+    font-size: 12px;
   }
 }
 
