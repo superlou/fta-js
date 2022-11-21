@@ -53,7 +53,6 @@ export default class TreeNodeComponent extends Component {
     }
     
     lines.push(prevLine);
-    console.log(lines);
 
     testing.remove();    
     el.innerHTML = "";
@@ -73,7 +72,7 @@ export default class TreeNodeComponent extends Component {
     
     // Adjust the background rectangle
     let rect = el.previousElementSibling;
-    console.log(rect);
+
     rect.setAttribute('x', -8);
     rect.setAttribute('y', -2);
     rect.setAttribute('width', bbox.width + 16);
