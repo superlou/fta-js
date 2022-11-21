@@ -70,9 +70,25 @@ export default class TreeNodeComponent extends Component {
     }
     
     let bbox = el.getBBox();
+    
+    // Adjust the background rectangle
+    let rect = el.previousElementSibling;
+    console.log(rect);
+    rect.setAttribute('x', -8);
+    rect.setAttribute('y', -2);
+    rect.setAttribute('width', bbox.width + 16);
+    rect.setAttribute('height', bbox.height + 10);
+
+    if (desc) {
+      rect.setAttribute('display', null);
+    } else {
+      rect.setAttribute('display', 'none');
+    }
+    
+    // Shift the content to align with the top of the node
     let g = el.parentElement;
     let xOffset = -bbox.width/2
-    let yOffset = -bbox.height - 30;
+    let yOffset = -bbox.height - 40;
     g.setAttribute('transform', `translate(${xOffset}, ${yOffset})`);
   }
 }
