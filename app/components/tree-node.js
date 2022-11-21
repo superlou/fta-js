@@ -20,11 +20,13 @@ export default class TreeNodeComponent extends Component {
   }
   
   wrapText(el, [desc, maxWidth]) {
+    let rectEl = el.firstElementChild;
+    let textEl = rectEl.nextElementSibling;
     let padding = 0;
     let linePadding = 0;
         
     // Make hidden copy of this node to draw, measure, and calculate line breaks
-    let testing = el.cloneNode(false);
+    let testing = textEl.cloneNode(false);
     testing.setAttributeNS(null, 'visibility', 'hidden');
     let testingTSpan = document.createElementNS(null, 'tspan');
     let testingTextNode = document.createTextNode(desc);
@@ -55,7 +57,7 @@ export default class TreeNodeComponent extends Component {
     lines.push(prevLine);
 
     testing.remove();    
-    el.innerHTML = "";
+    textEl.innerHTML = "";
     
     let lineCounter = 0;
     
@@ -64,30 +66,27 @@ export default class TreeNodeComponent extends Component {
       tspan.textContent = line;
       tspan.setAttribute('x', 0);
       tspan.setAttribute('dy', "1.2em");
-      el.appendChild(tspan);
+      textEl.appendChild(tspan);
       lineCounter++;
     }
     
-    let bbox = el.getBBox();
+    let bbox = textEl.getBBox();
     
     // Adjust the background rectangle
-    let rect = el.previousElementSibling;
-
-    rect.setAttribute('x', -8);
-    rect.setAttribute('y', -2);
-    rect.setAttribute('width', bbox.width + 16);
-    rect.setAttribute('height', bbox.height + 10);
+    rectEl.setAttribute('x', -8);
+    rectEl.setAttribute('y', -2);
+    rectEl.setAttribute('width', bbox.width + 16);
+    rectEl.setAttribute('height', bbox.height + 10);
 
     if (desc) {
-      rect.setAttribute('display', null);
+      rectEl.setAttribute('display', null);
     } else {
-      rect.setAttribute('display', 'none');
+      rectEl.setAttribute('display', 'none');
     }
     
     // Shift the content to align with the top of the node
-    let g = el.parentElement;
     let xOffset = -bbox.width/2
     let yOffset = -bbox.height - 40;
-    g.setAttribute('transform', `translate(${xOffset}, ${yOffset})`);
+    el.setAttribute('transform', `translate(${xOffset}, ${yOffset})`);
   }
 }

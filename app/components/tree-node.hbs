@@ -3,10 +3,9 @@
   <text x="0" y="4" class="ref">
     {{@model.ref}}
   </text>
-  <g>
+  <g {{did-insert this.wrapText @model.desc 200}}
+     {{did-update this.wrapText @model.desc 200}}>
     <rect fill="white" stroke="black" width="100" height="100"/>    
-    <text class="desc"
-      {{did-insert this.wrapText @model.desc 200}}
-      {{did-update this.wrapText @model.desc 200}}/>
+    <text class="desc"/>
   </g>
 </g>
