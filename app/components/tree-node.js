@@ -1,5 +1,6 @@
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 
 export default class TreeNodeComponent extends Component {
   andPath = 'm -20,20 h 40 v -16 c 0,-30  -40,-30 -40, 0 z';
@@ -8,6 +9,12 @@ export default class TreeNodeComponent extends Component {
   basicElementPath = 'm -25,0 a 25,25 0 1,1 50,0 a 25,25 0 1,1 -50,0';
 
   @tracked wrappedDesc = this.args.model.desc;
+   
+  @action
+  onMousedown(evt) {
+    this.args.onSelect(this.args.model);
+    evt.stopPropagation();
+  }
   
   get pathD() {
     if (this.args.model.nodeType == 'and-gate') {

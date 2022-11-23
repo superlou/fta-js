@@ -1,4 +1,5 @@
-<g class="tree-node" transform="translate({{@model.x}}, {{@model.y}})" {{on "mousedown" (fn @onSelect @model)}} ...attributes>
+<g class="tree-node" transform="translate({{@model.x}}, {{@model.y}})"
+    {{on "mousedown" this.onMousedown}} ...attributes>
   <path d={{this.pathD}} shape-rendering="optimizeQuality"/>
   <text x="0" y="4" class="ref">
     {{@model.ref}}

@@ -8,9 +8,24 @@ export default class TreeBuilderComponent extends Component {
   @service store;
 
   @tracked isDragging = false;
+  @tracked isPanning = false;
   @tracked solution = null;
   @tracked isLinking = false;
   mousePos = [0, 0];
+  
+  @tracked viewBoxX = 0;
+  @tracked viewBoxY = 0;
+  @tracked contentW = 0;
+  @tracked contentH = 0;
+  @tracked zoom = 1;
+  
+  get viewBoxW() {
+    return this.contentW * this.zoom;
+  }
+  
+  get viewBoxH() {
+    return this.contentH * this.zoom;
+  }
 
   @action
   async select(model) {
@@ -59,8 +74,39 @@ export default class TreeBuilderComponent extends Component {
     this.mousePos = [evt.clientX, evt.clientY];
 
     if (this.isDragging) {
-      this.shiftNode(this.args.selected, evt.movementX, evt.movementY);
+      this.shiftNode(this.args.selected,
+                     evt.movementX * this.zoom,
+                     evt.movementY * this.zoom);
     }
+    
+    if (this.isPanning) {
+      this.viewBoxX -= evt.movementX * this.zoom;
+      this.viewBoxY -= evt.movementY * this.zoom;
+    }
+  }
+  
+  @action
+  mouseDown(evt) {
+    this.isPanning = true;
+    this.args.deselect();
+  }
+  
+  @action
+  wheel(evt) {
+    let dy = evt.deltaY;
+    
+    if (dy > 0) {
+      this.zoom *= 1.1;
+    } else if (dy < 0) {
+      this.zoom /= 1.1;
+    }
+  }
+  
+  @action
+  onResize(resizeObserverEntry) {
+    let rect = resizeObserverEntry.contentRect;
+    this.contentW = rect.width;
+    this.contentH = rect.height;
   }
 
   shiftNode(node, dx, dy) {
@@ -72,6 +118,7 @@ export default class TreeBuilderComponent extends Component {
   @action
   mouseUp(evt) {
     this.isDragging = false;
+    this.isPanning = false;
   }
 
   @action

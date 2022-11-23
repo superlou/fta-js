@@ -44,6 +44,7 @@
     "ember-fetch": "^8.1.2",
     "ember-load-initializers": "^2.1.2",
     "ember-local-storage": "^2.0.4",
+    "ember-on-resize-modifier": "^1.1.0",
     "ember-page-title": "^7.0.0",
     "ember-qunit": "^6.0.0",
     "ember-resolver": "^8.0.3",

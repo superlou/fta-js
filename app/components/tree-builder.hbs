@@ -1,8 +1,13 @@
 <div class="tree-builder">
-  <svg width="100%" height="500"
+  <svg width="100%" height="500" tabindex="0"
+      viewBox="{{this.viewBoxX}} {{this.viewBoxY}} {{this.viewBoxW}} {{this.viewBoxH}}"
       {{on "mousemove" this.mouseMove}}
       {{on "mouseup" this.mouseUp}}
-      {{on "keydown" this.keyPress}} tabindex="0">
+      {{on "mousedown" this.mouseDown}}
+      {{on "keydown" this.keyPress}}
+      {{on "wheel" this.wheel}}
+      {{on-resize this.onResize}}
+      >
     {{#each @tree.edges as |edge|}}
       <TreeEdge @start={{edge.child}} @finish={{edge.parent}}/>
     {{/each}}
