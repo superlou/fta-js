@@ -10,4 +10,11 @@ export default class NodeEditorComponent extends Component {
   get disabled() {
     return this.args.model == null;
   }
+
+  nodeTypes = ['and-gate', 'or-gate', 'basic-event'];
+  
+  @action changeNodeType(nodeType) {
+    this.args.model.nodeType = nodeType;
+    this.saveModel();
+  }
 }

@@ -8,7 +8,7 @@
     <li class="one-line-property">
       <label for="node_ref">Ref:</label>
       <Input @type="text"
-        id="node_ref"
+        name="node_ref"
         @value={{@model.ref}}
         disabled={{this.disabled}}
         {{on "keyup" this.saveModel}}/>
@@ -16,10 +16,18 @@
     <li>
       <label for="node_desc">Description:</label><br/>
       <Textarea
-        id="node_desc"
+        name="node_desc"
         @value={{@model.desc}}
         disabled={{this.disabled}}
         {{on "keyup" this.saveModel}}/>
+    </li>
+    <li class="one-line-property">
+      <label for="node_type" class="one-line-property">Type:</label>
+      <PowerSelect @onChange={{this.changeNodeType}}
+                   @options={{this.nodeTypes}}
+                   @selected={{@model.nodeType}} as |name| >
+        {{name}}
+      </PowerSelect>
     </li>
   </ul>
 </div>
