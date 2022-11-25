@@ -8,6 +8,13 @@ export default class TreeNodeModel extends Model {
   @attr('string') desc;
   @attr('number') failureRate;
   @attr('number') exposureTime;
-  @attr('number') probability;
   @belongsTo('fault-tree', { async: true, inverse: 'nodes' }) faultTree;
+  
+  get probability() {
+    if (this.nodeType == "basic-event") {
+      return this.failureRate * this.exposureTime;
+    }
+    
+    return null;
+  }
 }

@@ -29,5 +29,26 @@
         {{name}}
       </PowerSelect>
     </li>
+    {{#if (eq @model.nodeType "basic-event")}}
+      <li class="one-line-property">
+        <label for="failure_rate">λ:</label>
+        <Input @type="text" name="failure_rate"
+          @value={{@model.failureRate}}
+          {{on "keyup" this.saveModel}}/>
+      </li>
+      <li class="one-line-property">
+        <label for="exposure_time">T:</label>
+        <Input @type="text" name="exposure_time"
+          @value={{@model.exposureTime}}
+          {{on "keyup" this.saveModel}}/>
+      </li>
+      <li class="one-line-property">
+        <label for="probability">p:</label>
+        <Input @type="text" name="probability"
+          @value={{@model.probability}}
+          disabled=true
+          {{on "keyup" this.saveModel}}/>
+      </li>
+    {{/if}}
   </ul>
 </div>
