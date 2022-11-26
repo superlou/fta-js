@@ -157,8 +157,8 @@ export default class TreeBuilderComponent extends Component {
     this.args.tree.save();
   }
 
-  async deleteNode(nodeId) {
-    const nodes = await this.args.tree.nodes;
+  deleteNode(nodeId) {
+    const nodes = this.args.tree.nodes;
     let node = this.args.selected;
 
     if (node) {
@@ -166,6 +166,12 @@ export default class TreeBuilderComponent extends Component {
       if (index > -1) {
         nodes.splice(index, 1);
         this.args.tree.save();
+
+        for (let edge of node.edges) {
+          edge.destroyRecord();
+          edge.save();
+        }
+        
         node.destroyRecord();
         node.save();
       }

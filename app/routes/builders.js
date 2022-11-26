@@ -4,7 +4,9 @@ import { service } from '@ember/service';
 export default class BuilderRoute extends Route {
   @service store;
 
-  model() {
+  async model() {
+    await this.store.findAll('tree-node');
+    await this.store.findAll('tree-edge');
     return this.store.findAll('fault-tree');
   }
 }

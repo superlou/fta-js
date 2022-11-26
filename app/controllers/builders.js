@@ -13,6 +13,16 @@ export default class BuildersController extends Controller {
 
   @action
   deleteFaultTree(faultTree) {
+    for (let node of faultTree.nodes) {
+      node.deleteRecord();
+      node.save();  
+    }
+    
+    for (let edge of faultTree.edges) {
+      edge.deleteRecord();
+      edge.save();  
+    }
+    
     faultTree.deleteRecord();
     faultTree.save();
   }
