@@ -67,6 +67,26 @@ body {
   }
 }
 
+.tree-builder .hotkeys {
+  ul {
+    padding: 0px;
+    margin: 0px;
+  }
+  
+  ul li {
+    display: inline-block;
+    padding-right: 0.4em;
+    
+    .hotkey {
+      background: #505050;
+      color: white;
+      border-radius: 4px;
+      padding: 2px 0.4em;
+      font-family: fixed;
+    }
+  }
+}
+
 .tree-node {
   path {
     stroke: black;

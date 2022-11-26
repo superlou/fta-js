@@ -15,7 +15,16 @@
       <TreeNode @model={{node}} @onSelect={{this.select}} class="{{if (eq @selected node) 'selected'}}"/>
     {{/each}}
   </svg>
+  <div class="hotkeys">
+    <ul>
+      <li><span class="hotkey">a</span> Add AND gate</li>
+      <li><span class="hotkey">o</span> Add OR gate</li>
+      <li><span class="hotkey">e</span> Add basic event</li>
+      <li><span class="hotkey">l</span> Start linking (click 2nd node to link)</li>
+      <li><span class="hotkey">del</span> Delete selected node and its links</li>
+    </ul>
+  </div>
   <div>
-    Solution: {{this.solution}}<br/>
+    <p>Solution: {{this.solution}}</p>
   </div>
 </div>
