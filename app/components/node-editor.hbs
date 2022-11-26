@@ -6,7 +6,7 @@
       {{@tree.id}}
     </li>
     <li>
-      <button {{on "click" @solveAll}}>Solve</button>
+      <button type="button" {{on "click" @solveAll}}>Solve</button>
     </li>
   </ul>
   <h1>Node Properties</h1>
@@ -56,8 +56,8 @@
         <label for="probability">p:</label>
         <Input @type="text" name="probability"
           @value={{@model.probability}}
-          disabled=true
-          {{on "keyup" this.saveModel}}/>
+          disabled="true"
+          {{on "keyup" this.saveModel}} />
       </li>
     {{/if}}
   </ul>

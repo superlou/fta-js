@@ -9,13 +9,13 @@ export default class TreeNodeComponent extends Component {
   basicEventPath = 'm -22,0 a 22,22 0 1,1 44,0 a 22,22 0 1,1 -44,0';
 
   @tracked wrappedDesc = this.args.model.desc;
-   
+
   @action
   onMousedown(evt) {
     this.args.onSelect(this.args.model);
     evt.stopPropagation();
   }
-  
+
   get pathD() {
     if (this.args.model.nodeType == 'and-gate') {
       return this.andPath;
@@ -25,13 +25,13 @@ export default class TreeNodeComponent extends Component {
       return this.basicEventPath;
     }
   }
-  
+
   wrapText(el, [desc, maxWidth]) {
     let rectEl = el.firstElementChild;
     let textEl = rectEl.nextElementSibling;
     let padding = 0;
     let linePadding = 0;
-        
+
     // Make hidden copy of this node to draw, measure, and calculate line breaks
     let testing = textEl.cloneNode(false);
     testing.setAttributeNS(null, 'visibility', 'hidden');
@@ -39,46 +39,49 @@ export default class TreeNodeComponent extends Component {
     let testingTextNode = document.createTextNode(desc);
     testingTSpan.appendChild(testingTextNode);
     testing.appendChild(testingTSpan);
-    
+
     let tester = document.getElementsByTagName('svg')[0].appendChild(testing);
-    
-    let words = desc.split(" ");
-    let prevLine = "";
-    let line = "";
+
+    let words = desc.split(' ');
+    let prevLine = '';
+    let line = '';
     let lines = [];
     let testWidth;
-    
+
     for (let n = 0; n < words.length; n++) {
-      line = prevLine + words[n] + " ";
+      line = prevLine + words[n] + ' ';
       testing.textContent = line;
       testWidth = testing.getBBox().width;
-      
+
       if (testWidth > maxWidth) {
         lines.push(prevLine);
-        prevLine = words[n] + " ";
+        prevLine = words[n] + ' ';
       } else {
         prevLine = line;
       }
     }
-    
+
     lines.push(prevLine);
 
-    testing.remove();    
-    textEl.innerHTML = "";
-    
+    testing.remove();
+    textEl.innerHTML = '';
+
     let lineCounter = 0;
-    
+
     for (const line of lines) {
-      let tspan = document.createElementNS('http://www.w3.org/2000/svg', 'tspan');
+      let tspan = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'tspan'
+      );
       tspan.textContent = line;
       tspan.setAttribute('x', 0);
-      tspan.setAttribute('dy', "1.2em");
+      tspan.setAttribute('dy', '1.2em');
       textEl.appendChild(tspan);
       lineCounter++;
     }
-    
+
     let bbox = textEl.getBBox();
-    
+
     // Adjust the background rectangle
     rectEl.setAttribute('x', -8);
     rectEl.setAttribute('y', -2);
@@ -90,9 +93,9 @@ export default class TreeNodeComponent extends Component {
     } else {
       rectEl.setAttribute('display', 'none');
     }
-    
+
     // Shift the content to align with the top of the node
-    let xOffset = -bbox.width/2
+    let xOffset = -bbox.width / 2;
     let yOffset = -bbox.height - 40;
     el.setAttribute('transform', `translate(${xOffset}, ${yOffset})`);
   }

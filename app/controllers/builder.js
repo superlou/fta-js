@@ -14,7 +14,7 @@ export default class BuilderController extends Controller {
   deselect(item) {
     this.selected = null;
   }
-  
+
   @action
   async solveAll() {
     for (let node of await this.model.nodes) {

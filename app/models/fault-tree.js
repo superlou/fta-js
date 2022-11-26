@@ -1,11 +1,10 @@
 import Model, { attr, hasMany } from '@ember-data/model';
 import mocus from '../utils/mocus';
 
-
 export default class FaultTreeModel extends Model {
   @hasMany('tree-node', { async: false, inverse: 'faultTree' }) nodes;
   @hasMany('tree-edge', { async: false, inverse: 'faultTree' }) edges;
-  
+
   findMCS(rootNodeId) {
     let nodes = this.nodes;
     let edges = this.edges;
@@ -48,7 +47,7 @@ export default class FaultTreeModel extends Model {
       )
       .join(' + ');
   }
-  
+
   probFromMCS(mcs) {
     let pMap = {};
 
@@ -58,19 +57,19 @@ export default class FaultTreeModel extends Model {
         pMap[node.id] = node.probability;
       }
     }
-        
+
     let sum = 0;
-    
+
     for (const set of mcs) {
       let product = 1;
-      
+
       for (const nodeId of set) {
         product *= pMap[nodeId];
       }
-      
+
       sum += product;
     }
-    
+
     return sum;
   }
 }
