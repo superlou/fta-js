@@ -169,47 +169,9 @@ export default class TreeBuilderComponent extends Component {
       }
     }
   }
-
+  
   async solve(rootNodeId) {
-    let nodes = await this.args.tree.nodes;
-    let edges = await this.args.tree.edges;
-    let gates = {};
-    const nodeTypeMap = { 'or-gate': 'or', 'and-gate': 'and' };
-
-    for (const node of nodes) {
-      if (!Object.keys(nodeTypeMap).includes(node.nodeType)) {
-        continue;
-      }
-
-      gates[node.id] = {
-        id: node.id,
-        kind: nodeTypeMap[node.nodeType],
-        children: [],
-      };
-    }
-
-    for (const edge of edges) {
-      let parent = await edge.parent;
-      let child = await edge.child;
-      gates[parent.id]['children'].push(child.id);
-    }
-
-    gates = Object.values(gates).map((gate) => [
-      gate.id,
-      gate.kind,
-      gate.children,
-    ]);
-    let result = mocus(gates, rootNodeId);
-    this.solution = await this.formatMocusResult(result);
-  }
-
-  async formatMocusResult(result) {
-    const nodes = await this.args.tree.nodes;
-
-    return result
-      .map((union) =>
-        union.map((nodeId) => nodes.find((n) => n.id == nodeId).ref).join('.')
-      )
-      .join(' + ');
+    let minCutSets = await this.args.tree.findMCS(rootNodeId);
+    this.solution = await this.args.tree.formatMocusResult(minCutSets);
   }
 }

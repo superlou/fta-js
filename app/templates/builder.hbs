@@ -8,5 +8,5 @@
 </div>
 <div class="sidebar">
   <LinkTo @route="builders" class="back-link">←</LinkTo>
-  <NodeEditor @model={{this.selected}}/>
+  <NodeEditor @model={{this.selected}} @tree={{@model}} @solveAll={{this.solveAll}}/>
 </div>

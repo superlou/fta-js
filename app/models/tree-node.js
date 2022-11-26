@@ -8,11 +8,14 @@ export default class TreeNodeModel extends Model {
   @attr('string') desc;
   @attr('number') failureRate;
   @attr('number') exposureTime;
-  @belongsTo('fault-tree', { async: true, inverse: 'nodes' }) faultTree;
+  @attr minCutSets;
+  @belongsTo('fault-tree', { async: false, inverse: 'nodes' }) faultTree;
   
   get probability() {
     if (this.nodeType == "basic-event") {
-      return this.failureRate * this.exposureTime;
+      return 1 - Math.exp(-this.failureRate * this.exposureTime);
+    } else if (this.minCutSets) {
+      return this.faultTree.probFromMCS(this.minCutSets);
     }
     
     return null;
