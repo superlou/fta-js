@@ -29,4 +29,5 @@ jobs:
           node-version: '16'
       - run: npm install -g ember-cli
       - run: ember -v
+      - run: npm install
       - run: ember build --environment production
