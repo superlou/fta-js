@@ -1,4 +1,5 @@
 import Component from '@glimmer/component';
+import { action } from '@ember/object';
 
 export default class TreeEdgeComponent extends Component {
   edgeCurve = 50;
@@ -6,11 +7,10 @@ export default class TreeEdgeComponent extends Component {
   get pathD() {
     let edgeCurve = this.edgeCurve;
 
-    // get(...) is required to avoid error
-    let startX = this.args.start.get('x');
-    let startY = this.args.start.get('y');
-    let finishX = this.args.finish.get('x');
-    let finishY = this.args.finish.get('y');
+    let startX = this.args.model.child.x;
+    let startY = this.args.model.child.y;
+    let finishX = this.args.model.parent.x;
+    let finishY = this.args.model.parent.y;
 
     return (
       `M ${startX},${startY} ` +
@@ -18,5 +18,11 @@ export default class TreeEdgeComponent extends Component {
         finishY + edgeCurve
       }, ${finishX},${finishY}`
     );
+  }
+  
+  @action
+  onMousedown(evt) {
+    this.args.onSelect(this.args.model);
+    evt.stopPropagation();
   }
 }

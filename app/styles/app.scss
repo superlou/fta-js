@@ -116,10 +116,21 @@ body {
 }
 
 .tree-edge {
-  path {
+  path.edge {
     stroke: black;
-    stroke-width: 2;
+    stroke-width: 2px;
     fill: none;
+  }
+  
+  path.outline {
+    stroke: #ffffff00;
+    fill: none;
+    stroke-width: 8px;
+  }
+  
+  &.selected path.outline {
+    stroke: #d0e8ff;
+    stroke-width: 8px;
   }
 }
 

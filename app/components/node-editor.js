@@ -17,4 +17,12 @@ export default class NodeEditorComponent extends Component {
     this.args.model.nodeType = nodeType;
     this.saveModel();
   }
+  
+  get showNodeEditor() {
+    return this.args.model && this.args.model.constructor.modelName === "tree-node";
+  }
+  
+  get showEdgeEditor() {
+    return this.args.model && this.args.model.constructor.modelName === "tree-edge";
+  }
 }

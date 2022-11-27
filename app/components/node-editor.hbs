@@ -9,56 +9,67 @@
       <button type="button" {{on "click" @solveAll}}>Solve</button>
     </li>
   </ul>
-  <h1>Node Properties</h1>
-  <ul>
-    <li class="one-line-property">
-      <label>ID:</label>
-      {{@model.id}}
-    </li>
-    <li class="one-line-property">
-      <label for="node_ref">Ref:</label>
-      <Input @type="text"
-        name="node_ref"
-        @value={{@model.ref}}
-        disabled={{this.disabled}}
-        {{on "keyup" this.saveModel}}/>
-    </li>
-    <li>
-      <label for="node_desc">Description:</label><br/>
-      <Textarea
-        name="node_desc"
-        @value={{@model.desc}}
-        disabled={{this.disabled}}
-        {{on "keyup" this.saveModel}}/>
-    </li>
-    <li class="one-line-property">
-      <label for="node_type" class="one-line-property">Type:</label>
-      <PowerSelect @onChange={{this.changeNodeType}}
-                   @options={{this.nodeTypes}}
-                   @selected={{@model.nodeType}} as |name| >
-        {{name}}
-      </PowerSelect>
-    </li>
-    {{#if (eq @model.nodeType "basic-event")}}
+  {{#if this.showNodeEditor}}
+    <h1>Node Properties</h1>
+    <ul>
       <li class="one-line-property">
-        <label for="failure_rate">λ:</label>
-        <Input @type="text" name="failure_rate"
-          @value={{@model.failureRate}}
+        <label>ID:</label>
+        {{@model.id}}
+      </li>
+      <li class="one-line-property">
+        <label for="node_ref">Ref:</label>
+        <Input @type="text"
+          name="node_ref"
+          @value={{@model.ref}}
+          disabled={{this.disabled}}
+          {{on "keyup" this.saveModel}}/>
+      </li>
+      <li>
+        <label for="node_desc">Description:</label><br/>
+        <Textarea
+          name="node_desc"
+          @value={{@model.desc}}
+          disabled={{this.disabled}}
           {{on "keyup" this.saveModel}}/>
       </li>
       <li class="one-line-property">
-        <label for="exposure_time">T:</label>
-        <Input @type="text" name="exposure_time"
-          @value={{@model.exposureTime}}
-          {{on "keyup" this.saveModel}}/>
+        <label for="node_type" class="one-line-property">Type:</label>
+        <PowerSelect @onChange={{this.changeNodeType}}
+                    @options={{this.nodeTypes}}
+                    @selected={{@model.nodeType}} as |name| >
+          {{name}}
+        </PowerSelect>
       </li>
+      {{#if (eq @model.nodeType "basic-event")}}
+        <li class="one-line-property">
+          <label for="failure_rate">λ:</label>
+          <Input @type="text" name="failure_rate"
+            @value={{@model.failureRate}}
+            {{on "keyup" this.saveModel}}/>
+        </li>
+        <li class="one-line-property">
+          <label for="exposure_time">T:</label>
+          <Input @type="text" name="exposure_time"
+            @value={{@model.exposureTime}}
+            {{on "keyup" this.saveModel}}/>
+        </li>
+        <li class="one-line-property">
+          <label for="probability">p:</label>
+          <Input @type="text" name="probability"
+            @value={{@model.probability}}
+            disabled="true"
+            {{on "keyup" this.saveModel}} />
+        </li>
+      {{/if}}
+    </ul>
+  {{/if}}
+  {{#if this.showEdgeEditor}}
+    <h1>Edge Properties</h1>
+    <ul>
       <li class="one-line-property">
-        <label for="probability">p:</label>
-        <Input @type="text" name="probability"
-          @value={{@model.probability}}
-          disabled="true"
-          {{on "keyup" this.saveModel}} />
+        <label>ID:</label>
+        {{@model.id}}
       </li>
-    {{/if}}
-  </ul>
+    </ul>
+  {{/if}}
 </div>

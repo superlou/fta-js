@@ -134,7 +134,11 @@ export default class TreeBuilderComponent extends Component {
     } else if (evt.key == 'e') {
       this.createNode('basic-event');
     } else if (evt.key == 'Delete') {
-      this.deleteNode(this.args.selected);
+      if (this.args.selected.constructor.modelName == 'tree-node') {
+        this.deleteNode(this.args.selected);        
+      } else if (this.args.selected.constructor.modelName == 'tree-edge') {
+        this.deleteEdge(this.args.selected);
+      }
     } else if (evt.key == 'l' && this.args.selected) {
       this.isLinking = true;
     } else if (evt.key == 'Escape') {
@@ -157,25 +161,52 @@ export default class TreeBuilderComponent extends Component {
     this.args.tree.save();
   }
 
-  deleteNode(nodeId) {
-    const nodes = this.args.tree.nodes;
-    let node = this.args.selected;
-
-    if (node) {
-      const index = nodes.indexOf(node);
-      if (index > -1) {
-        nodes.splice(index, 1);
-        this.args.tree.save();
-
-        for (let edge of node.edges) {
-          edge.destroyRecord();
-          edge.save();
-        }
-        
-        node.destroyRecord();
-        node.save();
-      }
+  deleteNode(node) {
+    const tree = this.args.tree;
+    if (!node) {
+      return;
     }
+
+    const index = tree.nodes.indexOf(node);
+    if (index > -1) {
+      tree.nodes.splice(index, 1);
+      this.args.tree.save();
+    }
+    
+    for (let edge of node.edges) {
+      this.deleteEdge(edge);
+    }
+        
+    node.destroyRecord();
+    node.save();    
+  }
+  
+  deleteEdge(edge) {   
+    let child = edge.child;
+    let parent = edge.parent;
+    let tree = edge.faultTree;
+    console.log(edge.id, child.edges);
+    
+    let index = child.edges.indexOf(edge);
+    if (index > -1) {
+      child.edges.splice(index, 1);
+      child.save();
+    }
+    
+    index = parent.edges.indexOf(edge);
+    if (index > -1) {
+      parent.edges.splice(index, 1);
+      parent.save();
+    }
+    
+    index = tree.edges.indexOf(edge);
+    if (index > -1) {
+      tree.edges.splice(index, 1);
+      tree.save();
+    }
+
+    edge.destroyRecord();
+    edge.save();
   }
 
   async solve(rootNodeId) {

@@ -9,10 +9,12 @@
       {{on-resize this.onResize}}
       >
     {{#each @tree.edges as |edge|}}
-      <TreeEdge @start={{edge.child}} @finish={{edge.parent}}/>
+      <TreeEdge @model={{edge}} @onSelect={{this.select}}
+        class="{{if (eq @selected edge) 'selected'}}"/>
     {{/each}}
     {{#each @tree.nodes as |node|}}
-      <TreeNode @model={{node}} @onSelect={{this.select}} class="{{if (eq @selected node) 'selected'}}"/>
+      <TreeNode @model={{node}} @onSelect={{this.select}}
+        class="{{if (eq @selected node) 'selected'}}"/>
     {{/each}}
   </svg>
   <div class="hotkeys">

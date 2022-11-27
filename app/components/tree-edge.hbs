@@ -1,3 +1,4 @@
-<g class="tree-edge">
-  <path d={{this.pathD}} shape-rendering="optimizeQuality"/>
+<g class="tree-edge" {{on "mousedown" this.onMousedown}} ...attributes>
+  <path d={{this.pathD}} shape-rendering="optimizeQuality" class="outline"/>
+  <path d={{this.pathD}} shape-rendering="optimizeQuality" class="edge"/>
 </g>
