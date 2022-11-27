@@ -1,21 +1,23 @@
 <div class="node-editor">
-  <h1>Tree Properties</h1>
-  <ul>
-    <li class="one-line-property">
-      <label>ID:</label>
-      {{@tree.id}}
-    </li>
-    <li class="one-line-property">
-      <label>Title:</label>
-        <Input @type="text"
-          name="node_ref"
-          @value={{@tree.title}}
-          {{on "keyup" this.saveTree}}/>
-    </li>    
-    <li>
-      <button type="button" {{on "click" @solveAll}}>Solve</button>
-    </li>
-  </ul>
+  {{#if this.showTreeEditor}}
+    <h1>Tree Properties</h1>
+    <ul>
+      <li class="one-line-property">
+        <label>ID:</label>
+        {{@tree.id}}
+      </li>
+      <li class="one-line-property">
+        <label>Title:</label>
+          <Input @type="text"
+            name="node_ref"
+            @value={{@tree.title}}
+            {{on "keyup" this.saveTree}}/>
+      </li>    
+      <li>
+        <button type="button" {{on "click" @solveAll}}>Solve</button>
+      </li>
+    </ul>
+  {{/if}}
   {{#if this.showNodeEditor}}
     <h1>Node Properties</h1>
     <ul>

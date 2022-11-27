@@ -23,6 +23,10 @@ export default class NodeEditorComponent extends Component {
     this.saveModel();
   }
   
+  get showTreeEditor() {
+    return !this.args.model;
+  }
+  
   get showNodeEditor() {
     return this.args.model && this.args.model.constructor.modelName === "tree-node";
   }
