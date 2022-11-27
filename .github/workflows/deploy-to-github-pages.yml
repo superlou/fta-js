@@ -28,6 +28,7 @@ jobs:
       - run: ember -v
       - run: npm install
       - run: ember build --environment production
+      = run: cp dist/index.html dist/404.html
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist

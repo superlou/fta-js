@@ -41,7 +41,6 @@ module.exports = function (environment) {
 
   if (environment === 'production') {
     ENV.rootURL = '/fta-js/';
-    ENV.locationType = 'hash';
   }
 
   return ENV;
