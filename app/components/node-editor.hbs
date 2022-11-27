@@ -5,6 +5,13 @@
       <label>ID:</label>
       {{@tree.id}}
     </li>
+    <li class="one-line-property">
+      <label>Title:</label>
+        <Input @type="text"
+          name="node_ref"
+          @value={{@tree.title}}
+          {{on "keyup" this.saveTree}}/>
+    </li>    
     <li>
       <button type="button" {{on "click" @solveAll}}>Solve</button>
     </li>

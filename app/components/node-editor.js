@@ -6,6 +6,11 @@ export default class NodeEditorComponent extends Component {
   saveModel(evt) {
     this.args.model.save();
   }
+  
+  @action
+  saveTree(evt) {
+    this.args.tree.save();
+  }
 
   get disabled() {
     return this.args.model == null;
