@@ -148,7 +148,6 @@ export default class TreeBuilderComponent extends Component {
   }
 
   createNode(gateType) {
-    console.log(this.mousePos);
     let record = this.store.createRecord('tree-node', {
       x: this.mousePos[0],
       y: this.mousePos[1],
@@ -185,7 +184,6 @@ export default class TreeBuilderComponent extends Component {
     let child = edge.child;
     let parent = edge.parent;
     let tree = edge.faultTree;
-    console.log(edge.id, child.edges);
     
     let index = child.edges.indexOf(edge);
     if (index > -1) {
