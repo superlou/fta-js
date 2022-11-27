@@ -1,12 +1,12 @@
 {{page-title "Builder"}}
 
-<div class="content-left">
-  <div class="content-left-container">
+<div class="container">
+  <div class="content-left">
     <TreeBuilder @tree={{@model}} @selected={{this.selected}}
       @select={{this.select}} @deselect={{this.deselect}}/>
   </div>
-</div>
-<div class="sidebar">
-  <LinkTo @route="builders" class="back-link">←</LinkTo>
-  <NodeEditor @model={{this.selected}} @tree={{@model}} @solveAll={{this.solveAll}}/>
+  <div class="sidebar">
+    <LinkTo @route="builders" class="back-link">←</LinkTo>
+    <NodeEditor @model={{this.selected}} @tree={{@model}} @solveAll={{this.solveAll}}/>
+  </div>
 </div>

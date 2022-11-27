@@ -1,0 +1,41 @@
+.node-editor {  
+  h1 {
+    font-size: 8pt;
+    margin: 0px;
+    margin-bottom: 0.4em;
+    text-transform: uppercase;
+    color: #808080;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    
+    li {
+      padding: 0.2em 0px;
+    }
+    
+    textarea {
+      width: 100%;
+      height: 100px;
+    }
+    
+    li.one-line-property {
+      label {
+        width: 50px;
+        display: inline-block;
+      }
+      
+      input {
+        width: 150px;
+      }
+      
+      .ember-basic-dropdown-trigger {
+        display: inline-block;
+        width: 140px;
+        // top: 10px;
+      }
+    }
+  }
+}
