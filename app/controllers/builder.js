@@ -3,16 +3,24 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 export default class BuilderController extends Controller {
-  @tracked selected = null;
-
+  @tracked selectedId = null;
+  queryParams = ['selectedId'];
+  
   @action
   select(item) {
-    this.selected = item;
+    this.selectedId = item.id;
   }
 
   @action
   deselect(item) {
-    this.selected = null;
+    this.selectedId = null;
+  }
+  
+  get selected() {
+    let nodes = this.model.nodes;
+    let edges = this.model.edges;
+    let items = nodes.concat(edges);
+    return items.find(item => item.id === this.selectedId);
   }
 
   @action
