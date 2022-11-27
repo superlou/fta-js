@@ -27,6 +27,7 @@
   
   ul li {
     display: inline-block;
+    font-size: 0.8em;
     padding-right: 0.4em;
     padding-bottom: 0.4em;
     
@@ -36,6 +37,19 @@
       border-radius: 4px;
       padding: 2px 0.4em;
       font-family: fixed;
+      
+      &.disabled {
+        background: #b0b0b0;
+        color: #d0d0d0;
+      }
+    }
+    
+    .attention {
+      color: #d0e8ff;
+      border-bottom: 1px solid;
+      background: #4088ef;
+      padding: 2px 0.4em;
+      border-radius: 4px;
     }
   }
 }
