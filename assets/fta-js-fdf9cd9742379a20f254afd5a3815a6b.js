@@ -138,4 +138,4 @@ for(;null!==o;){let e=n[o][1],r=n[o][2]
 t[a]=e,i=i.concat([t])}))),[o,l,a]=t(i,n)}return i}function n(e,t){return[...e].every((e=>t.has(e)))}function i(e){(e=e.map((e=>new Set(e)))).sort(((e,t)=>e.size-t.size))
 let t=[]
 return e.forEach((e=>{t.map((t=>n(t,e))).some((e=>e))||t.push(e)})),t.map((e=>Array.from(e)))}Object.defineProperty(e,"__esModule",{value:!0}),e.buildMocusTable=r,e.default=function(e,t){return i(r(e,t))},e.findMCS=i,e.isSubset=n})),define("fta-js/config/environment",[],(function(){try{var e="fta-js/config/environment",t=document.querySelector('meta[name="'+e+'"]').getAttribute("content"),r={default:JSON.parse(decodeURIComponent(t))}
-return Object.defineProperty(r,"__esModule",{value:!0}),r}catch(n){throw new Error('Could not read config from meta tag with name "'+e+'".')}})),runningTests||require("fta-js/app").default.create({name:"fta-js",version:"0.0.0+9bcda711"})
+return Object.defineProperty(r,"__esModule",{value:!0}),r}catch(n){throw new Error('Could not read config from meta tag with name "'+e+'".')}})),runningTests||require("fta-js/app").default.create({name:"fta-js",version:"0.0.0+3a79cd10"})
