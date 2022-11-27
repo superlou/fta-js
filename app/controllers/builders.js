@@ -13,14 +13,24 @@ export default class BuildersController extends Controller {
 
   @action
   deleteFaultTree(faultTree) {
-    for (let node of faultTree.nodes) {
-      node.deleteRecord();
-      node.save();  
+    try {
+      for (let node of faultTree.nodes) {
+        node.deleteRecord();
+        node.save();  
+      }  
+    } catch (err) {
+      console.warn('Skipping deletion of nodes because some of the associated records were not loaded.');
+      console.warn(err);
     }
     
-    for (let edge of faultTree.edges) {
-      edge.deleteRecord();
-      edge.save();  
+    try {
+      for (let edge of faultTree.edges) {
+        edge.deleteRecord();
+        edge.save();  
+      }
+    } catch(err) {
+      console.warn('Skipping deletion of edges because some of the associated records were not loaded.');
+      console.warn(err);      
     }
     
     faultTree.deleteRecord();
