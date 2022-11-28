@@ -70,6 +70,10 @@
             {{on "keyup" this.saveModel}} />
         </li>
       {{/if}}
+      <li>
+        <label>Minimal Cut Sets:</label>
+        <McsList @node={{@model}} />
+      </li>
     </ul>
   {{/if}}
   {{#if this.showEdgeEditor}}

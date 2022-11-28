@@ -126,7 +126,7 @@ export default class TreeBuilderComponent extends Component {
   @action
   keyPress(evt) {
     if (evt.key == 's' && this.args.selected) {
-      this.solve(this.args.selected.id);
+      this.args.solveAll();
     } else if (evt.key == 'a') {
       this.createNode('and-gate');
     } else if (evt.key == 'o') {
@@ -135,7 +135,7 @@ export default class TreeBuilderComponent extends Component {
       this.createNode('basic-event');
     } else if (evt.key == 'Delete') {
       if (this.args.selected.constructor.modelName == 'tree-node') {
-        this.deleteNode(this.args.selected);        
+        this.deleteNode(this.args.selected);
       } else if (this.args.selected.constructor.modelName == 'tree-edge') {
         this.deleteEdge(this.args.selected);
       }
@@ -171,32 +171,32 @@ export default class TreeBuilderComponent extends Component {
       tree.nodes.splice(index, 1);
       this.args.tree.save();
     }
-    
+
     for (let edge of node.edges) {
       this.deleteEdge(edge);
     }
-        
+
     node.destroyRecord();
-    node.save();    
+    node.save();
   }
-  
-  deleteEdge(edge) {   
+
+  deleteEdge(edge) {
     let child = edge.child;
     let parent = edge.parent;
     let tree = edge.faultTree;
-    
+
     let index = child.edges.indexOf(edge);
     if (index > -1) {
       child.edges.splice(index, 1);
       child.save();
     }
-    
+
     index = parent.edges.indexOf(edge);
     if (index > -1) {
       parent.edges.splice(index, 1);
       parent.save();
     }
-    
+
     index = tree.edges.indexOf(edge);
     if (index > -1) {
       tree.edges.splice(index, 1);
@@ -205,10 +205,5 @@ export default class TreeBuilderComponent extends Component {
 
     edge.destroyRecord();
     edge.save();
-  }
-
-  async solve(rootNodeId) {
-    let minCutSets = await this.args.tree.findMCS(rootNodeId);
-    this.solution = await this.args.tree.formatMocusResult(minCutSets);
   }
 }

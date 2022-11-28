@@ -19,7 +19,7 @@ export default class TreeEdgeComponent extends Component {
       }, ${finishX},${finishY}`
     );
   }
-  
+
   @action
   onMousedown(evt) {
     this.args.onSelect(this.args.model);

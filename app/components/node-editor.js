@@ -6,7 +6,7 @@ export default class NodeEditorComponent extends Component {
   saveModel(evt) {
     this.args.model.save();
   }
-  
+
   @action
   saveTree(evt) {
     this.args.tree.save();
@@ -22,16 +22,20 @@ export default class NodeEditorComponent extends Component {
     this.args.model.nodeType = nodeType;
     this.saveModel();
   }
-  
+
   get showTreeEditor() {
     return !this.args.model;
   }
-  
+
   get showNodeEditor() {
-    return this.args.model && this.args.model.constructor.modelName === "tree-node";
+    return (
+      this.args.model && this.args.model.constructor.modelName === 'tree-node'
+    );
   }
-  
+
   get showEdgeEditor() {
-    return this.args.model && this.args.model.constructor.modelName === "tree-edge";
+    return (
+      this.args.model && this.args.model.constructor.modelName === 'tree-edge'
+    );
   }
 }

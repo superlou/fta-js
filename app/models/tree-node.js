@@ -10,13 +10,13 @@ export default class TreeNodeModel extends Model {
   @attr('number') exposureTime;
   @attr minCutSets;
   @belongsTo('fault-tree', { async: false, inverse: 'nodes' }) faultTree;
-  @hasMany('tree-edge', { async: false, inverse: 'child'}) childEdges;
-  @hasMany('tree-edge', { async: false, inverse: 'parent'}) parentEdges;
+  @hasMany('tree-edge', { async: false, inverse: 'child' }) childEdges;
+  @hasMany('tree-edge', { async: false, inverse: 'parent' }) parentEdges;
 
   get edges() {
     return this.childEdges.concat(this.parentEdges);
   }
-  
+
   get probability() {
     if (this.nodeType == 'basic-event') {
       return 1 - Math.exp(-this.failureRate * this.exposureTime);
