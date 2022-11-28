@@ -1,6 +1,7 @@
 @import 'ember-power-select';
 @import 'node-editor';
 @import 'tree-builder';
+@import 'index';
 
 html {
   min-height: 100%;
@@ -31,4 +32,13 @@ body {
     float: right;
     text-decoration: none;
   }  
+}
+
+.builders-content {
+  width: 600px;
+  margin: 0px auto;
+  
+  h1, h2, h3 {
+    font-family: Lato;
+  }    
 }

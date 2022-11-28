@@ -1,0 +1,43 @@
+#index {
+  .hero {
+    font-size: 24pt;
+    padding: 40pt 18pt;
+    background: #60a0ff;
+    color: white;
+    font-family: Lato;
+    font-weight: 300;
+    
+    & b {
+      font-weight: 700;
+    }
+    
+    a.hero-action {
+      // background: #fff000;
+      text-decoration: none;
+      font-size: 16pt;
+      padding: 2px 8px;
+      font-family: sans;
+      // color: black;
+      // border: 2px solid #fff00000;
+      
+      background: #00000000;
+      color: #fff000;
+      border: 2px solid #fff000;      
+    }
+    
+    a.hero-action:hover {
+      background: #fff000;
+      color: black;
+      border: 2px solid #fff00000;
+    }
+  }
+    
+  h1, h2, h3 {
+    font-family: Lato;
+  }    
+    
+  .content {
+    width: 600px;
+    margin: 0px auto;
+  }
+}

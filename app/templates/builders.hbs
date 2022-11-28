@@ -1,10 +1,13 @@
-<ul>
-  {{#each this.model as |faultTree|}}
-    <li>
-      <LinkTo @route="builder" @model={{faultTree.id}}>{{faultTree.title}} ({{faultTree.id}})</LinkTo>
-      <button type="button" {{on "click" (fn this.deleteFaultTree faultTree)}}>X</button>
-    </li>
-  {{/each}}
-</ul>
-
-<button type="button" {{on "click" this.createFaultTree}}>New Fault Tree</button>
+<div class="builders-content">
+  <h1>Fault Trees</h1>
+  <ul>
+    {{#each this.model as |faultTree|}}
+      <li>
+        <LinkTo @route="builder" @model={{faultTree.id}}>{{faultTree.title}} ({{faultTree.id}})</LinkTo>
+        <button type="button" {{on "click" (fn this.deleteFaultTree faultTree)}}>X</button>
+      </li>
+    {{/each}}
+  </ul>
+  
+  <button type="button" {{on "click" this.createFaultTree}}>New Fault Tree</button>
+</div>
