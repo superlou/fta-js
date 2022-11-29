@@ -12,17 +12,17 @@
     }
     
     a.hero-action {
-      // background: #fff000;
       text-decoration: none;
       font-size: 16pt;
       padding: 2px 8px;
-      font-family: sans;
-      // color: black;
-      // border: 2px solid #fff00000;
+      font-family: Lato;
+      font-weight: 700;
       
       background: #00000000;
       color: #fff000;
       border: 2px solid #fff000;      
+      
+      transition: background 0.1s, border-color 0.1s, color 0.1s;
     }
     
     a.hero-action:hover {
