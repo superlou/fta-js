@@ -125,7 +125,7 @@ export default class TreeBuilderComponent extends Component {
 
   @action
   keyPress(evt) {
-    if (evt.key == 's' && this.args.selected) {
+    if (evt.key == 's') {
       this.args.solveAll();
     } else if (evt.key == 'a') {
       this.createNode('and-gate');
