@@ -23,13 +23,19 @@ export default class BuilderController extends Controller {
     return items.find((item) => item.id === this.selectedId);
   }
 
+  wait(ms) {  
+    const start = Date.now();
+    let now = start;
+    while (now - start < ms) {
+      now = Date.now();
+    }
+  }
+  
   @action
-  async solveAll() {
-    for (let node of await this.model.nodes) {
-      // if (['and-gate', 'or-gate'].includes(node.nodeType)) {
+  solveAll() {
+    for (let node of this.model.nodes) {
       node.minCutSets = this.model.findMCS(node.id);
       node.save();
-      // }
     }
   }
 }

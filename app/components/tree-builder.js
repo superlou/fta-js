@@ -2,6 +2,7 @@ import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
+import { task, timeout } from 'ember-concurrency';
 import mocus from '../utils/mocus';
 
 export default class TreeBuilderComponent extends Component {
@@ -18,7 +19,7 @@ export default class TreeBuilderComponent extends Component {
   @tracked contentW = 0;
   @tracked contentH = 0;
   @tracked zoom = 1;
-
+  
   get viewBoxW() {
     return this.contentW * this.zoom;
   }
@@ -122,11 +123,16 @@ export default class TreeBuilderComponent extends Component {
     this.isDragging = false;
     this.isPanning = false;
   }
-
+ 
+  solveAll = task(async () => {
+    this.args.solveAll();
+    await timeout(100);
+  });
+  
   @action
-  keyPress(evt) {
+  async keyPress(evt) {    
     if (evt.key == 's') {
-      this.args.solveAll();
+      this.solveAll.perform();
     } else if (evt.key == 'a') {
       this.createNode('and-gate');
     } else if (evt.key == 'o') {

@@ -30,7 +30,14 @@
           <span class="hotkey">l</span> Start linking
         {{/if}}
       </li>
-      <li><span class="hotkey">s</span> Solve all</li>
+      <li>
+        {{#if this.solveAll.isRunning}}
+          <span class="hotkey disabled">s</span>
+          Solving...
+        {{else}}
+          <span class="hotkey">s</span> Solve all
+        {{/if}}
+      </li>
       <li><span class="hotkey">del</span> Delete</li>
       <li><span class="hotkey">esc</span> Cancel</li>
     </ul>
