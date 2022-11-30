@@ -13,7 +13,7 @@
     <text class="node-prop" x="25" y="-8">λ={{small-num @model.failureRate}}</text>
   {{/if}}
   {{#if @model.exposureTime}}
-    <text class="node-prop" x="25" y="5">T={{@model.exposureTime}}</text>
+    <text class="node-prop" x="25" y="5">T={{intl-num @model.exposureTime}}</text>
   {{/if}}
   {{#if @model.probability}}
     <text class="node-prop" x="25" y="18">p={{small-num @model.probability}}</text>

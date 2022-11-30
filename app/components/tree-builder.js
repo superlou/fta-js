@@ -19,7 +19,7 @@ export default class TreeBuilderComponent extends Component {
   @tracked contentW = 0;
   @tracked contentH = 0;
   @tracked zoom = 1;
-  
+
   get viewBoxW() {
     return this.contentW * this.zoom;
   }
@@ -123,14 +123,14 @@ export default class TreeBuilderComponent extends Component {
     this.isDragging = false;
     this.isPanning = false;
   }
- 
+
   solveAll = task(async () => {
     this.args.solveAll();
     await timeout(100);
   });
-  
+
   @action
-  async keyPress(evt) {    
+  async keyPress(evt) {
     if (evt.key == 's') {
       this.solveAll.perform();
     } else if (evt.key == 'a') {
