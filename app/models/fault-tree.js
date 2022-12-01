@@ -59,18 +59,14 @@ export default class FaultTreeModel extends Model {
       }
     }
 
-    let sum = 0;
+    let products = mcs.map((set) =>
+      set.reduce((acc, nodeId) => acc * pMap[nodeId], 1)
+    );
+    
+    // Using the identify which assumes independence from
+    // https://math.stackexchange.com/questions/66480/probability-of-union-of-4-or-more-elements
+    let union = 1 - products.reduce((acc, product) => acc * (1 - product), 1);
 
-    for (const set of mcs) {
-      let product = 1;
-
-      for (const nodeId of set) {
-        product *= pMap[nodeId];
-      }
-
-      sum += product;
-    }
-
-    return sum;
+    return union;
   }
 }
