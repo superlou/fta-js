@@ -108,11 +108,8 @@ for(const r of t)Object.keys(o).includes(r.nodeType)&&(i[r.id]={id:r.id,kind:o[r
 for(const r of n){let e=r.parent,t=r.child
 i[e.id].children.push(t.id)}return i=Object.values(i).map((e=>[e.id,e.kind,e.children])),(0,r.default)(i,e)}formatMocusResult(e){const t=this.nodes
 return e.map((e=>e.map((e=>t.find((t=>t.id==e)).ref)).join("."))).join(" + ")}probFromMCS(e){let t={}
-for(const n of this.nodes)"basic-event"==n.nodeType&&(t[n.id]=n.probability)
-let r=0
-for(const n of e){let e=1
-for(const r of n)e*=t[r]
-r+=e}return r}},a=c(l.prototype,"title",[n],{configurable:!0,enumerable:!0,writable:!0,initializer:null}),s=c(l.prototype,"nodes",[i],{configurable:!0,enumerable:!0,writable:!0,initializer:null}),u=c(l.prototype,"edges",[o],{configurable:!0,enumerable:!0,writable:!0,initializer:null}),l)
+for(const r of this.nodes)"basic-event"==r.nodeType&&(t[r.id]=r.probability)
+return 1-e.map((e=>e.reduce(((e,r)=>e*t[r]),1))).reduce(((e,t)=>e*(1-t)),1)}},a=c(l.prototype,"title",[n],{configurable:!0,enumerable:!0,writable:!0,initializer:null}),s=c(l.prototype,"nodes",[i],{configurable:!0,enumerable:!0,writable:!0,initializer:null}),u=c(l.prototype,"edges",[o],{configurable:!0,enumerable:!0,writable:!0,initializer:null}),l)
 e.default=f})),define("fta-js/models/tree-edge",["exports","@ember-data/model"],(function(e,t){var r,n,i,o,l,a,s
 function u(e,t,r,n){r&&Object.defineProperty(e,t,{enumerable:r.enumerable,configurable:r.configurable,writable:r.writable,value:r.initializer?r.initializer.call(n):void 0})}function d(e,t,r,n,i){var o={}
 return Object.keys(n).forEach((function(e){o[e]=n[e]})),o.enumerable=!!o.enumerable,o.configurable=!!o.configurable,("value"in o||o.initializer)&&(o.writable=!0),o=r.slice().reverse().reduce((function(r,n){return n(e,t,r)||r}),o),i&&void 0!==o.initializer&&(o.value=o.initializer?o.initializer.call(i):void 0,o.initializer=void 0),void 0===o.initializer&&(Object.defineProperty(e,t,o),o=null),o}Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
@@ -154,4 +151,4 @@ for(;null!==o;){let e=n[o][1],r=n[o][2]
 t[a]=e,i=i.concat([t])}))),[o,l,a]=t(i,n)}return i}function n(e,t){return[...e].every((e=>t.has(e)))}function i(e){(e=e.map((e=>new Set(e)))).sort(((e,t)=>e.size-t.size))
 let t=[]
 return e.forEach((e=>{t.map((t=>n(t,e))).some((e=>e))||t.push(e)})),t.map((e=>Array.from(e)))}Object.defineProperty(e,"__esModule",{value:!0}),e.buildMocusTable=r,e.default=function(e,t){return i(r(e,t))},e.findMCS=i,e.isSubset=n})),define("fta-js/config/environment",[],(function(){try{var e="fta-js/config/environment",t=document.querySelector('meta[name="'+e+'"]').getAttribute("content"),r={default:JSON.parse(decodeURIComponent(t))}
-return Object.defineProperty(r,"__esModule",{value:!0}),r}catch(n){throw new Error('Could not read config from meta tag with name "'+e+'".')}})),runningTests||require("fta-js/app").default.create({name:"fta-js",version:"0.0.0+076645ac"})
+return Object.defineProperty(r,"__esModule",{value:!0}),r}catch(n){throw new Error('Could not read config from meta tag with name "'+e+'".')}})),runningTests||require("fta-js/app").default.create({name:"fta-js",version:"0.0.0+a597a4c0"})
