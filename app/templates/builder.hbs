@@ -3,10 +3,12 @@
 <div class="container">
   <div class="content-left">
     <TreeBuilder @tree={{@model}} @selected={{this.selected}}
-      @select={{this.select}} @deselect={{this.deselect}} @solveAll={{this.solveAll}}/>
+      @select={{this.select}} @deselect={{this.deselect}} @solveAll={{this.solveAll}}
+      @setFocusProperty={{this.setFocusProperty}}/>
   </div>
   <div class="sidebar">
     <LinkTo @route="builders" class="back-link">←</LinkTo>
-    <NodeEditor @model={{this.selected}} @tree={{@model}} @solveAll={{this.solveAll}}/>
+    <NodeEditor @model={{this.selected}} @tree={{@model}} @solveAll={{this.solveAll}}
+      @focusProperty={{this.focusProperty}}/>
   </div>
 </div>

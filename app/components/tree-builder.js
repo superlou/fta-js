@@ -131,6 +131,8 @@ export default class TreeBuilderComponent extends Component {
 
   @action
   async keyPress(evt) {
+    evt.preventDefault();
+    
     if (evt.key == 's') {
       this.solveAll.perform();
     } else if (evt.key == 'a') {
@@ -164,6 +166,9 @@ export default class TreeBuilderComponent extends Component {
     });
     record.save();
     this.args.tree.save();
+
+    this.args.select(record);
+    this.args.setFocusProperty('node_ref');
   }
 
   deleteNode(node) {

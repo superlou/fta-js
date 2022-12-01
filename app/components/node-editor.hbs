@@ -31,7 +31,8 @@
           name="node_ref"
           @value={{@model.ref}}
           disabled={{this.disabled}}
-          {{on "keyup" this.saveModel}}/>
+          {{on "keyup" this.saveModel}}
+          {{focus-if-named @focusProperty}}/>
       </li>
       <li>
         <label for="node_desc">Description:</label><br/>
