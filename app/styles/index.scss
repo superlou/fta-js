@@ -1,17 +1,18 @@
-#index {
-  .hero {
-    font-size: 24pt;
-    padding: 40pt 18pt;
-    background: #60a0ff;
+#index_hero_bg {
+  background: #60a0ff;
+  @extend .mb-5;
+}
+
+#index_hero {
+  @extend .container;
+  @extend .py-5;
+  color: white;
+  
+  .text-muted {
     color: white;
-    font-family: Lato;
-    font-weight: 300;
-    
-    & b {
-      font-weight: 700;
-    }
-    
-    a.hero-action {
+  }
+  
+    a.hero-btn {
       text-decoration: none;
       font-size: 16pt;
       padding: 2px 8px;
@@ -23,21 +24,11 @@
       border: 2px solid #fff000;      
       
       transition: background 0.1s, border-color 0.1s, color 0.1s;
+      
+      &:hover {
+        background: #fff000;
+        color: black;
+        border: 2px solid #fff00000;
+      }
     }
-    
-    a.hero-action:hover {
-      background: #fff000;
-      color: black;
-      border: 2px solid #fff00000;
-    }
-  }
-    
-  h1, h2, h3 {
-    font-family: Lato;
-  }    
-    
-  .content {
-    width: 600px;
-    margin: 0px auto;
-  }
 }

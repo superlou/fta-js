@@ -3,18 +3,35 @@
 @import 'tree-builder';
 @import 'index';
 
-html {
-  min-height: 100%;
+$headings-font-family: Lato;
+@import 'ember-bootstrap/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons';
+
+button {
+  @extend .btn;
+  @extend .btn-primary;
+  
+  &.danger {
+    @extend .btn;
+    @extend .btn-outline-danger;
+  }
 }
 
-body {
-  height: 100%;
-  margin: 0px;
-  padding: 0px;
-  font-family: sans-serif;
+.page-content {
+  @extend .container;
+  @extend .my-3;
 }
 
-.container {
+table {
+  @extend .table;
+  @extend .align-middle;
+  
+  button.danger {
+    @extend .btn-sm;
+  }
+}
+
+.builder-container {
   display: grid;
   grid-template-columns: auto 250px;
   height: 100vh;
@@ -32,13 +49,4 @@ body {
     float: right;
     text-decoration: none;
   }  
-}
-
-.builders-content {
-  width: 600px;
-  margin: 0px auto;
-  
-  h1, h2, h3 {
-    font-family: Lato;
-  }    
 }

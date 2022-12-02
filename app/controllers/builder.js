@@ -5,14 +5,14 @@ import { tracked } from '@glimmer/tracking';
 export default class BuilderController extends Controller {
   @tracked selectedId = null;
   queryParams = ['selectedId'];
-  
+
   @tracked focusProperty = null;
-  
+
   @action
   setFocusProperty(property) {
     this.focusProperty = property;
   }
-  
+
   @action
   select(item) {
     this.selectedId = item.id;

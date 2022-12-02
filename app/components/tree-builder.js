@@ -132,7 +132,7 @@ export default class TreeBuilderComponent extends Component {
   @action
   async keyPress(evt) {
     evt.preventDefault();
-    
+
     if (evt.key == 's') {
       this.solveAll.perform();
     } else if (evt.key == 'a') {
