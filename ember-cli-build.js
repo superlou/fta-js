@@ -28,6 +28,6 @@ module.exports = function (defaults) {
   app.import('node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2', {
     destDir: 'assets/fonts',
   });
-  
+
   return app.toTree();
 };

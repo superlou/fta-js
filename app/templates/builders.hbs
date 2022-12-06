@@ -1,6 +1,7 @@
 <div class="page-content">
   <h1>Fault Trees</h1>
   <button type="button" {{on "click" this.createFaultTree}}><i class="bi-plus"/> New Fault Tree</button>
+  <UploadButton @doUpload={{this.importFaultTree}}><i class="bi-upload"/> Import</UploadButton>
   <table>
     <thead>
       <tr>
@@ -19,6 +20,9 @@
             {{faultTree.title}}
           </td>
           <td>
+            <button type="button" {{on "click" (fn this.exportFaultTree faultTree)}}>
+              <i class="bi-download"/> Export
+            </button>            
             <button type="button" {{on "click" (fn this.deleteFaultTree faultTree)}} class="danger">
               <i class="bi-x"/> Delete
             </button>

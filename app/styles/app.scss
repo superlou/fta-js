@@ -26,6 +26,10 @@ table {
   @extend .table;
   @extend .align-middle;
   
+  button {
+    @extend .btn-sm;
+  }
+  
   button.danger {
     @extend .btn-sm;
   }

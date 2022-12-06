@@ -1,0 +1,4 @@
+<button type="button" {{on "click" this.clickFileInput}}>
+  <input type="file" style="display:none" {{on "change" @doUpload}}/>
+  {{yield}}
+</button>
