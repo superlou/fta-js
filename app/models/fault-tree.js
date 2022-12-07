@@ -3,6 +3,7 @@ import mocus from '../utils/mocus';
 
 export default class FaultTreeModel extends Model {
   @attr('string') title;
+  @attr('number') snapDistance;
   @hasMany('tree-node', { async: false, inverse: 'faultTree' }) nodes;
   @hasMany('tree-edge', { async: false, inverse: 'faultTree' }) edges;
 

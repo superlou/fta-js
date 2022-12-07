@@ -13,6 +13,8 @@ export default class TreeBuilderComponent extends Component {
   @tracked solution = null;
   @tracked isLinking = false;
   mousePos = [0, 0];
+  dragShift = [0, 0];
+  originalPos = {};
 
   @tracked viewBoxX = 0;
   @tracked viewBoxY = 0;
@@ -36,6 +38,8 @@ export default class TreeBuilderComponent extends Component {
     }
 
     this.isDragging = true;
+    this.dragShift = [0, 0];
+    this.originalPos[model.id] = [model.x, model.y];
     this.args.select(model);
   }
 
@@ -73,13 +77,24 @@ export default class TreeBuilderComponent extends Component {
   @action
   mouseMove(evt) {
     this.mousePos = [evt.clientX, evt.clientY];
-
+    
     if (this.isDragging) {
-      this.shiftNode(
-        this.args.selected,
-        evt.movementX * this.zoom,
-        evt.movementY * this.zoom
-      );
+      this.dragShift[0] += evt.movementX * this.zoom;
+      this.dragShift[1] += evt.movementY * this.zoom;
+      
+      let node = this.args.selected;
+      let x = this.originalPos[node.id][0] + this.dragShift[0];
+      let y = this.originalPos[node.id][1] + this.dragShift[1];
+      
+      let snap = this.args.tree.snapDistance;
+      if (snap > 1) {
+        x = Math.round(x / snap) * snap;
+        y = Math.round(y / snap) * snap;
+      }
+      
+      node.x = x;
+      node.y = y;
+      node.save();
     }
 
     if (this.isPanning) {
@@ -112,15 +127,10 @@ export default class TreeBuilderComponent extends Component {
     this.contentH = rect.height;
   }
 
-  shiftNode(node, dx, dy) {
-    node.x += dx;
-    node.y += dy;
-    node.save();
-  }
-
   @action
   mouseUp(evt) {
     this.isDragging = false;
+    this.dragShift = [0, 0];
     this.isPanning = false;
   }
 

@@ -12,7 +12,14 @@
             name="node_ref"
             @value={{@tree.title}}
             {{on "keyup" this.saveTree}}/>
-      </li>    
+      </li>
+      <li class="one-line-property">
+        <label>Grid:</label>
+          <Input @type="text"
+            name="node_ref"
+            @value={{@tree.snapDistance}}
+            {{on "keyup" this.saveTree}}/>
+      </li>          
       <li>
         <button type="button" {{on "click" @solveAll}}>Solve</button>
       </li>
