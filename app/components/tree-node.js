@@ -7,6 +7,7 @@ export default class TreeNodeComponent extends Component {
   orPath =
     'm -20,20 c 10,-10 30,-10 40,0 v -4 c 0,-20 -16,-36 -20,-36 c -4,0 -20,16 -20,36 z';
   basicEventPath = 'm -22,0 a 22,22 0 1,1 44,0 a 22,22 0 1,1 -44,0';
+  undevelopedEventPath = 'm -25 0 l 25 25 l 25 -25 l -25 -25 z';
 
   @tracked wrappedDesc = this.args.model.desc;
 
@@ -23,6 +24,8 @@ export default class TreeNodeComponent extends Component {
       return this.orPath;
     } else if (this.args.model.nodeType == 'basic-event') {
       return this.basicEventPath;
+    } else if (this.args.model.nodeType == 'undeveloped-event') {
+      return this.undevelopedEventPath;
     }
   }
 

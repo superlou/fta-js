@@ -77,21 +77,21 @@ export default class TreeBuilderComponent extends Component {
   @action
   mouseMove(evt) {
     this.mousePos = [evt.clientX, evt.clientY];
-    
+
     if (this.isDragging) {
       this.dragShift[0] += evt.movementX * this.zoom;
       this.dragShift[1] += evt.movementY * this.zoom;
-      
+
       let node = this.args.selected;
       let x = this.originalPos[node.id][0] + this.dragShift[0];
       let y = this.originalPos[node.id][1] + this.dragShift[1];
-      
+
       let snap = this.args.tree.snapDistance;
       if (snap > 1) {
         x = Math.round(x / snap) * snap;
         y = Math.round(y / snap) * snap;
       }
-      
+
       node.x = x;
       node.y = y;
       node.save();

@@ -57,21 +57,21 @@ export default class BuildersController extends Controller {
     fileLink.click();
     fileLink.remove();
   }
-  
+
   // This creates an export compatible with what Ember Local Storage Adapater
   // expects to import. This puts all records in data and doesn't use includes.
   createImportableJson(faultTree) {
     let json = faultTree.serialize({ includeId: true });
     json.data = [json.data];
-    
+
     let related = faultTree.nodes.concat(faultTree.edges);
-    json.data = json.data.concat(related.map(
-      (model) => model.serialize({ includeId: true }).data
-    ));
-    
+    json.data = json.data.concat(
+      related.map((model) => model.serialize({ includeId: true }).data)
+    );
+
     return json;
   }
-  
+
   // This creates a more typical export for a single record, but isn't
   // compatible with what is expected for import.
   createJsonFromFaultTree(faultTree) {
@@ -80,7 +80,7 @@ export default class BuildersController extends Controller {
     json.included = related.map(
       (model) => model.serialize({ includeId: true }).data
     );
-    return json;    
+    return json;
   }
 
   @action
@@ -92,11 +92,11 @@ export default class BuildersController extends Controller {
         type: 'application/json;charset=utf-8',
       });
       let json = await blob.text();
-      
+
       this.importFaultTreeFromJson(json);
     }
   }
-  
+
   importFaultTreeFromJson(json) {
     this.store.importData(json, {
       truncate: false,

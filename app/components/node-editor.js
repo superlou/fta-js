@@ -16,7 +16,7 @@ export default class NodeEditorComponent extends Component {
     return this.args.model == null;
   }
 
-  nodeTypes = ['and-gate', 'or-gate', 'basic-event'];
+  nodeTypes = ['and-gate', 'or-gate', 'basic-event', 'undeveloped-event'];
 
   @action changeNodeType(nodeType) {
     this.args.model.nodeType = nodeType;
