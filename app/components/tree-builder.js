@@ -74,6 +74,16 @@ export default class TreeBuilderComponent extends Component {
     child.save();
   }
 
+  snapPos(x, y) {
+    let snap = this.args.tree.snapDistance;
+    if (snap > 1) {
+      x = Math.round(x / snap) * snap;
+      y = Math.round(y / snap) * snap;
+    }
+    
+    return [x, y];
+  }
+  
   @action
   mouseMove(evt) {
     this.mousePos = [evt.clientX, evt.clientY];
@@ -84,13 +94,8 @@ export default class TreeBuilderComponent extends Component {
 
       let node = this.args.selected;
       let x = this.originalPos[node.id][0] + this.dragShift[0];
-      let y = this.originalPos[node.id][1] + this.dragShift[1];
-
-      let snap = this.args.tree.snapDistance;
-      if (snap > 1) {
-        x = Math.round(x / snap) * snap;
-        y = Math.round(y / snap) * snap;
-      }
+      let y = this.originalPos[node.id][1] + this.dragShift[1];   
+      [x, y] = this.snapPos(x, y);
 
       node.x = x;
       node.y = y;
@@ -166,9 +171,11 @@ export default class TreeBuilderComponent extends Component {
   }
 
   createNode(gateType) {
+    let [x, y] = this.snapPos(...this.mousePos);
+    
     let record = this.store.createRecord('tree-node', {
-      x: this.mousePos[0],
-      y: this.mousePos[1],
+      x: x,
+      y: y,
       nodeType: gateType,
       ref: '',
       desc: '',
