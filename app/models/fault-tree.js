@@ -54,8 +54,8 @@ export default class FaultTreeModel extends Model {
     let pMap = {};
 
     for (const node of this.nodes) {
-      // Only get probability from basic-event nodes to avoid infinite recursion
-      if (node.nodeType == 'basic-event') {
+      // Only get probability from event nodes to avoid infinite recursion
+      if (['basic-event', 'undeveloped-event'].includes(node.nodeType)) {
         pMap[node.id] = node.probability;
       }
     }

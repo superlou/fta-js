@@ -18,7 +18,7 @@ export default class TreeNodeModel extends Model {
   }
 
   get probability() {
-    if (this.nodeType == 'basic-event') {
+    if (['basic-event', 'undeveloped-event'].includes(this.nodeType)) {
       return 1 - Math.exp(-this.failureRate * this.exposureTime);
     } else if (this.minCutSets) {
       return this.faultTree.probFromMCS(this.minCutSets);
