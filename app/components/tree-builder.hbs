@@ -14,6 +14,11 @@
     {{/each}}
     {{#each @tree.nodes as |node|}}
       <TreeNode @model={{node}} @onSelect={{this.select}}
+        @onDoubleClickRef={{(fn @setFocusProperty "node_ref")}}
+        @onDoubleClickDesc={{(fn @setFocusProperty "node_desc")}}
+        @onDoubleClickFailureRate={{(fn @setFocusProperty "failure_rate")}}
+        @onDoubleClickExposureTime={{(fn @setFocusProperty "exposure_time")}}
+        @onDoubleClickProbability={{(fn @setFocusProperty "probability")}}
         class="{{if (eq @selected node) 'selected'}}"/>
     {{/each}}
   </svg>

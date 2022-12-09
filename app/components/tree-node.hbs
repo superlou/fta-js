@@ -1,21 +1,28 @@
 <g class="tree-node" transform="translate({{@model.x}}, {{@model.y}})"
     {{on "mousedown" this.onMousedown}} ...attributes>
   <path d={{this.pathD}} shape-rendering="optimizeQuality"/>
-  <text x="0" y="4" class="ref">
+  <text x="0" y="4" class="ref" {{on "dblclick" @onDoubleClickRef}}>
     {{@model.ref}}
   </text>
   <g {{did-insert this.wrapText @model.desc 200}}
-     {{did-update this.wrapText @model.desc 200}}>
+     {{did-update this.wrapText @model.desc 200}}
+     {{on "dblclick" @onDoubleClickDesc}}>
     <rect fill="white" stroke="black" width="100" height="100"/>    
     <text class="desc"/>
   </g>
   {{#if @model.failureRate}}
-    <text class="node-prop" x="25" y="-8">λ={{small-num @model.failureRate}}</text>
+    <text class="node-prop" x="25" y="-8" {{on "dblclick" @onDoubleClickFailureRate}}>
+      λ={{small-num @model.failureRate}}
+    </text>
   {{/if}}
   {{#if @model.exposureTime}}
-    <text class="node-prop" x="25" y="5">T={{intl-num @model.exposureTime}}</text>
+    <text class="node-prop" x="25" y="5" {{on "dblclick" @onDoubleClickExposureTime}}>
+      T={{intl-num @model.exposureTime}}
+    </text>
   {{/if}}
   {{#if @model.probability}}
-    <text class="node-prop" x="25" y="18">p={{small-num @model.probability}}</text>
+    <text class="node-prop" x="25" y="18" {{on "dblclick" @onDoubleClickProbability}}>
+      p={{small-num @model.probability}}
+    </text>
   {{/if}}    
 </g>

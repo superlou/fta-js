@@ -47,7 +47,8 @@
           name="node_desc"
           @value={{@model.desc}}
           disabled={{this.disabled}}
-          {{on "keyup" this.saveModel}}/>
+          {{on "keyup" this.saveModel}}
+          {{focus-if-named @focusProperty}}/>
       </li>
       <li>
         <label for="node_type" class="one-line-property">Type:</label>
@@ -62,20 +63,23 @@
           <label for="failure_rate">λ:</label>
           <Input @type="text" name="failure_rate"
             @value={{@model.failureRate}}
-            {{on "keyup" this.saveModel}}/>
+            {{on "keyup" this.saveModel}}
+            {{focus-if-named @focusProperty}}/>
         </li>
         <li class="one-line-property">
           <label for="exposure_time">T:</label>
           <Input @type="text" name="exposure_time"
             @value={{@model.exposureTime}}
-            {{on "keyup" this.saveModel}}/>
+            {{on "keyup" this.saveModel}}
+            {{focus-if-named @focusProperty}}/>
         </li>
         <li class="one-line-property">
           <label for="probability">p:</label>
           <Input @type="text" name="probability"
             @value={{@model.probability}}
             disabled="true"
-            {{on "keyup" this.saveModel}} />
+            {{on "keyup" this.saveModel}}
+            {{focus-if-named @focusProperty}}/>
         </li>
       {{/if}}
       <li>
