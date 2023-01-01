@@ -111,7 +111,7 @@ export default class TreeBuilderComponent extends Component {
   @action
   mouseDown(evt) {
     this.isPanning = true;
-    this.args.deselect();
+    this.args.deselectAll();
   }
 
   @action

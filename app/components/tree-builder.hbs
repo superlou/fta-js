@@ -10,7 +10,7 @@
       >
     {{#each @tree.edges as |edge|}}
       <TreeEdge @model={{edge}} @onSelect={{this.select}}
-        class="{{if (eq @selected edge) 'selected'}}"/>
+        class="{{if (in-array edge @selected) 'selected'}}"/>
     {{/each}}
     {{#each @tree.nodes as |node|}}
       <TreeNode @model={{node}} @onSelect={{this.select}}
@@ -19,7 +19,7 @@
         @onDoubleClickFailureRate={{(fn @setFocusProperty "failure_rate")}}
         @onDoubleClickExposureTime={{(fn @setFocusProperty "exposure_time")}}
         @onDoubleClickProbability={{(fn @setFocusProperty "probability")}}
-        class="{{if (eq @selected node) 'selected'}}"/>
+        class="{{if (in-array node @selected) 'selected'}}"/>
     {{/each}}
   </svg>
   <div class="hotkeys">

@@ -4,7 +4,7 @@ import { action } from '@ember/object';
 export default class NodeEditorComponent extends Component {
   @action
   saveModel(evt) {
-    this.args.model.save();
+    this.activeModel.save();
   }
 
   @action
@@ -19,23 +19,32 @@ export default class NodeEditorComponent extends Component {
   nodeTypes = ['and-gate', 'or-gate', 'basic-event', 'undeveloped-event'];
 
   @action changeNodeType(nodeType) {
-    this.args.model.nodeType = nodeType;
+    this.activeModel.nodeType = nodeType;
     this.saveModel();
+  }
+  
+  get activeModel() {
+    if (this.args.model.length > 0) {
+      console.log(this.args.model.map(model => model.constructor.modelName));
+      return this.args.model.at(-1);
+    } else {
+      return undefined;
+    }
   }
 
   get showTreeEditor() {
-    return !this.args.model;
+    return !this.activeModel;
   }
 
   get showNodeEditor() {
     return (
-      this.args.model && this.args.model.constructor.modelName === 'tree-node'
+      this.activeModel && this.activeModel.constructor.modelName === 'tree-node'
     );
   }
 
   get showEdgeEditor() {
     return (
-      this.args.model && this.args.model.constructor.modelName === 'tree-edge'
+      this.activeModel && this.activeModel.constructor.modelName === 'tree-edge'
     );
   }
 }

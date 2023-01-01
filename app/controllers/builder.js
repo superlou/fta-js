@@ -3,8 +3,8 @@ import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
 
 export default class BuilderController extends Controller {
-  @tracked selectedId = null;
-  queryParams = ['selectedId'];
+  @tracked selectedIds = [];  // Can't be a set because order matters
+  queryParams = ['selectedIds'];
 
   @tracked focusProperty = null;
 
@@ -15,19 +15,29 @@ export default class BuilderController extends Controller {
 
   @action
   select(item) {
-    this.selectedId = item.id;
+    console.log(item.id);
+    this.deselect(item);
+    this.selectedIds.push(item.id);
+    console.log(this.selectedIds);
   }
 
   @action
   deselect(item) {
-    this.selectedId = null;
+    this.selectedIds = this.selectedIds.filter(id => id != item.id);
+  }
+  
+  @action
+  deselectAll() {
+    this.selectedIds = [];
   }
 
   get selected() {
     let nodes = this.model.nodes;
     let edges = this.model.edges;
     let items = nodes.concat(edges);
-    return items.find((item) => item.id === this.selectedId);
+    let idMap = Object.fromEntries(items.map(item => [item.id, item]));
+    
+    return this.selectedIds.map(id => idMap[id]);
   }
 
   wait(ms) {
