@@ -7,6 +7,13 @@
         {{@tree.id}}
       </li>
       <li class="one-line-property">
+        <label>Ref:</label>
+          <Input @type="text"
+            name="node_ref"
+            @value={{@tree.ref}}
+            {{on "keyup" this.saveTree}}/>
+      </li>      
+      <li class="one-line-property">
         <label>Title:</label>
           <Input @type="text"
             name="node_ref"

@@ -6,6 +6,7 @@
     <thead>
       <tr>
         <th>ID</th>
+        <th>Ref</th>
         <th>Name</th>
         <th></th>
       </tr>
@@ -15,6 +16,9 @@
         <tr>
           <td>
             <LinkTo @route="builder" @model={{faultTree.id}}>{{faultTree.id}}</LinkTo>
+          </td>
+          <td>
+            {{faultTree.ref}}
           </td>
           <td>
             {{faultTree.title}}

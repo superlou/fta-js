@@ -2,6 +2,7 @@ import Model, { attr, hasMany } from '@ember-data/model';
 import mocus from '../utils/mocus';
 
 export default class FaultTreeModel extends Model {
+  @attr('string') ref;
   @attr('string') title;
   @attr('number') snapDistance;
   @hasMany('tree-node', { async: false, inverse: 'faultTree' }) nodes;
