@@ -7,6 +7,13 @@ module.exports = function (defaults) {
     'ember-bootstrap': {
       bootstrapVersion: 5,
       importBootstrapCSS: false,
+      insertEmberWormholeElementToDom: false,
+    },
+    babel: {
+      plugins: [
+        require.resolve("ember-concurrency/async-arrow-task-transform"),
+        // NOTE: put any code coverage plugins last, after the transform.
+      ],
     },
   });
 
